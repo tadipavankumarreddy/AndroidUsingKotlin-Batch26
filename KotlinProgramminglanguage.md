@@ -216,3 +216,72 @@ fun main()
 }
 ```
 
+#### Arrays in Kotlin
+Array is one of the fundamental data structures in practically all programming languages. The idea behind an array is to store multiple pieces of the same data type, such as integers or strings , under a single name. 
+
+Arrays are used to organize data in programming so that related set of values can easily be stored and searched for. 
+
+***Important points to remember***
+1. They are stored in contiguous memory locations. 
+2. They can be accessed programmatically through their indices. 
+3. They are mutable.
+4. Their size is fixed
+5. The index of the array starts at 0 and ends at 1 less than the actual size of the array. 
+
+***Create an Array using arrayOf() and arrayOf<DataType>() functions***
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+fun main(){
+    val a = arrayOf(1,2,33,4,5,6,7,9,8,10)
+    // Get the size of the array
+    println("The size of the array is ${a.size}")
+
+    // The index starts at 0
+    /*println("The first element of the array is ${a[0]}")*/
+    println("The first element of the array is ${a.get(0)}")
+
+    // The index ends at 1 less than the actual size
+    println("The last item in the array is ${a[a.size-1]}")
+
+    // What if you want to modify the existing value ?
+    a.set(5,29)
+
+    a[8] = 789
+
+    for (i in a){
+        print("$i ")
+    }
+
+}
+```
+
+***Creating an Array with `Array` Constructor***
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.Scanner
+fun main(){
+    println("Enter the size of an Array")
+    val sc = Scanner(System.`in`)
+    val size = sc.nextInt()
+    val arr = Array<Int>(size,{i->i*2})
+
+    for (i in arr){
+        print("$i ")
+    }
+}
+```
+
+***Key Differences between `arrayOf()` and `Array()`***
+
+Feature|arrayOf()|Array Constructor
+---|---|---
+Length | Based on Number of Arguments| Defined Explicitly
+Initialization|values are passed directly|Lambda is used to intialize the elements
+Use case| Simple, fixed data| When elements need to be generated 
+
+
+
+
