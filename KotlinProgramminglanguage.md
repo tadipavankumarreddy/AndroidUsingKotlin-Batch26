@@ -282,6 +282,274 @@ Length | Based on Number of Arguments| Defined Explicitly
 Initialization|values are passed directly|Lambda is used to intialize the elements
 Use case| Simple, fixed data| When elements need to be generated 
 
+#### OOPs in Kotlin
+
+***OOP - Object Oriented Programming***
+
+Procedural programming is about writing the procedures or methods that operate on data while, OOP is about creating objects that contain both method and data.
+
+***Advantages***
+- Faster and easier to execute
+- Provides clear structure of the program
+- OOP helps to keep the kotlin code DRY (Dont repeat yourself)
+- Reusabilty
+
+***Kotlin Objects and Classes***
+
+- Any real world entity that shows attributes and behaviors can considered as an Object.
+- A class is a blueprint of an Object. 
+
+Unlike Java, Kotlin is null safe. That is the reason, the variables that you declare must be intialized or they can also accept null values if your specify explicitly with `?` combination.
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.Scanner
+
+class Dog{
+    // Dog Attributes -> name, age & Weight
+    var name:String? = null
+    var age:Int? = null
+    var weight:Double? = null
+
+    fun display(){
+        println("$name of age $age is of weight $weight")
+    }
+}
+
+fun main(){
+    val d = Dog() // This is the place where you created a copy of the class and assigned with some memory
+    d.name = "Tommy"
+    d.age = 2
+    d.weight = 20.5
+    d.display()
+
+    val d2 = Dog()
+    d2.name = "Max"
+    d2.age = 3
+    d2.weight = 25.5
+    d2.display()
+}
+```
 
 
+#### Constructors in Kotlin
+In Kotlin, A Constructor is a special block of code that initializes a new object of the class. There are two types of constructors in Kotlin. 
+
+1. Primary constructor
+- The primary constructor is a part of the class header and is declared after the class name. 
+- It is used to initialize the class with basic parameters
+2. Secondary Constructor
+- A class can have as many constructors as it needs, which are defined inside the class body using `constructor` keyword. 
+- They can provide additional initialization logic or different ways to initialize an Object. 
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.Scanner
+
+class Dog(var name:String?, var age:Int?, var weight:Double?){
+
+    constructor(name:String):this(name,0,0.0){
+        println("Remember that you only entered the name of the dog")
+    }
+
+    constructor(name:String,age:Int):this(name,age,0.0){
+        println("Remember that you only entered the name and age of the dog")
+    }
+
+    fun display(){
+        println("$name of age $age is of weight $weight")
+    }
+}
+
+fun main(){
+    val d = Dog("Tommy",2,20.5) // This is the place where you created a copy of the class and assigned with some memory
+    d.display()
+
+    val d2 = Dog("Max",3)
+    d2.display()
+}
+```
+
+#### Init block in kotlin
+In Kotlin, the `init` block is used to initialize class properties or execute logic during object creation. It runs immediately after the primary constructor is called before any secondary consturctors. 
+
+Why do we need to use `init` block ?
+- To validate the inputs
+- To perform computations during the object creation. 
+- To log/debug creation flow. 
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.Scanner
+
+class Person(val name: String, val age: Int){
+    init {
+        println("Person is created: $name is $age years old")
+        // Want to validate age -> because age must be greater than 0
+        require(age>=0){"Age must be positive"} 
+        // This is not exclusive to init block, you can literally use require(...) anywhere to validate a certain input and throw an illegalArgumentException if it fails.
+    }
+}
+
+fun main(){
+    val pavan = Person("Pavan", -1)
+}
+```
+
+***What happens ?***
+- Primary constructor parameters(name,age) are assigned. 
+- Init block executes
+  - printing the message
+  - validating the age
+
+
+***Multiple Init blocks***
+You can have more than one, and they execute in the oder they appear
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.Scanner
+
+class Sample{
+    init {
+        println("First Init")
+    }
+    init {
+        println("Second Init")
+    }
+}
+
+fun main(){
+    val sample = Sample()
+}
+```
+#### Inheritance in Kotlin
+- Inheritance is the process of acquring the properties and behaviors of one class into another class. 
+- Inheritance is primarily used for Re-usability of the code. 
+
+***Important Note:***
+- All classes in kotlin have a common super class `Any`, which is the default super class for a class with no super class defined. 
+
+```kotlin
+class ABCD{
+    // The default super class will be Any
+}
+```
+
+`Any` class has got three methods
+- equals()
+- hashCode()
+- toString()
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+class Dog(var name:String?, var age:Int?, var weight:Double?){
+
+    constructor(name:String):this(name,0,0.0){
+        println("Remember that you only entered the name of the dog")
+    }
+
+    constructor(name:String,age:Int):this(name,age,0.0){
+        println("Remember that you only entered the name and age of the dog")
+    }
+
+    fun display(){
+        println("$name of age $age is of weight $weight")
+    }
+}
+
+fun main(){
+    val d = Dog("Tommy",2,20.5) // This is the place where you created a copy of the class and assigned with some memory
+    val d2 = Dog("Tommy",2,20.5)
+    val d3 = d
+    println(d.equals(d2))
+    println(d.equals(d3))
+    println(d.toString())
+    println(d.hashCode())
+    println(d2.hashCode())
+}
+```
+
+TO get a meaningful output with the toString() method of `Any` class, use it with data classes
+
+```kotlin
+data class User(val name: String, val age: Int)
+
+fun main(){
+    val user = User("John",22)
+    println(user.toString())
+}
+```
+
+```kotlin
+data class User(val name: String, val age: Int)
+
+fun main(){
+    val user = User("John",22)
+    val user2 = User("John",22)
+    println(user.hashCode())
+    println(user2.hashCode())
+}
+```
+
+***Summary Table***
+
+Feature|Regular Class|Data class
+---|---|---
+toString()|Memory address (e.g., User@1a2g234)|Meaningful string with property values
+hashCode()|Based on the memory reference|Based on the property values in the constructor
+
+***Important Point:*** In kotlin all classes are `final` by default. If you want to subclass a class you have to use `open` keyword to make the class subclassable. 
+
+```kotlin
+class Pavan{
+    // This class is final and cannot be subclassed
+}
+```
+
+```kotlin
+open class Pavan{
+    // this class can be extended by a subclass.
+}
+```
+
+In `Java` we use `extends` keyword to create a subclass. In Kotlin we use `:` instead of `extends`.
+
+```kotlin
+open class Pavan{
+    // define something here
+}
+
+class kumar:Pavan(){
+    // All the features of Pavan comes here
+}
+```
+
+Example
+```kotlin
+package com.nareshtech.scorekeeper
+
+open class A(var name:String?, var age:Int?){
+    fun display(){
+        println("Name: $name Age: $age")
+    }
+}
+
+class B(var n:String?, var a:Int?, var salary:Int?):A(n,a){
+    fun display2(){
+        display()
+        println("$salary")
+    }
+}
+
+fun main(){
+    val b = B("Pavan",33,10000)
+    b.display2()
+}
+```
 
