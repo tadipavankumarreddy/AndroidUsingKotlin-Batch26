@@ -553,3 +553,270 @@ fun main(){
 }
 ```
 
+#### Encapsulation
+Encapsulation is a fundamental concept in OOP. It is used to hide the internal implementation details of a class and only expose what is necessary to the outside world. This leads to better data security, code maintaenance and modularity. 
+
+***Why encapsulation is needed in Kotlin ?***
+1. Protect data: Prevents direct access to class fields, avoiding accidental or unauthorized changes.
+2. Improves Maintainability: Internal logic can be changed without affecting external code. 
+3. Reduces complexity: only relevant data details are exposed, making the code easier to understand. 
+4. Control Over Data
+5. Promtes reusability & Testability
+
+***Modifiers in Kotlin***
+- private - The element that is declared private cannot be accessed outside the kotlin file or class that is defined in. These elements can only be accessed in the same place where they are defined. 
+  - The private modifier restricts visibility to 
+      - Within the same class or Object (for class members)
+      - within the same file (for top level declarations like functions or classes)
+- public - Elements can be accessed from anywhere
+- protected - Same as private except that subclasses can access the classs/interface elements.
+- internal - Anything in the module (folder) can be accessed. 
+
+***Reference Code:***
+```kotlin
+class Internals{
+    internal var a = 10
+}
+
+fun main(){
+    val i = Internals()
+    println(i.a)
+}
+```
+
+***Example***
+```kotlin
+package com.nareshtech.scorekeeper
+
+class BankAccount(private var balance:Double){
+    fun deposit(amount:Double){
+        if(amount>0){
+            balance+=amount
+            println("Deposited $amount. New balance is $balance")
+        }else{
+            println("Invalid deposit amount")
+        }
+    }
+    
+    fun withdraw(amount:Double){
+        if(amount>0 && amount<=balance){
+            balance-=amount
+            println("Withdrew $amount. New balance is $balance")
+        }else{
+            println("Invalid withdrawal amount or insufficient balance")
+        }
+    }
+    
+    fun getBalance():Double{
+        return balance
+    }
+}
+```
+
+By using encapsulation, the internal state of the `BankAccount` class is protected from direct access and modifications from outside the class. Only the methods provided by the class can modify the balance, ensuring that the class maintains control over how the balance is accessed and changed. This helps maintain integrity of data and prevents unintended side effects. 
+
+If a class with a certain functionality is defined in a different package and the elements in the class are accessible either directly (if they are declared public) or with the help of their helper methods (incase private or protected modifiers), you can write the import statements to import that module or a specific class. 
+
+If the class in the same module (package) needs to be accessed, you can directly access it without needing an import statement. 
+
+#### Polymorphism
+
+Existence in multiple forms
+- overloading (compile-time polymorphism)
+- overriding (runtime polymorphism)
+
+***Overloading***
+```kotlin
+package com.nareshtech.scorekeeper
+
+fun sum(a:Int, b:Int) = a+b
+
+fun sum(a:Int, b:Int, c:Int) = sum(a,b)+c
+
+fun sum(a:Int, b:Double):Double = a+b
+
+fun main(){
+    println(sum(10,20))
+    println(sum(10,20,30))
+    println(sum(10,20.89))
+}
+```
+
+***Overriding***
+
+The function that has `open` keyword can only be overridden. 
+
+```kotlin
+open class First{
+    open fun sum(a:Int, b:Int) = a+b
+
+    fun sum(a:Int, b:Int, c:Int) = sum(a,b)+c
+}
+
+class Second:First(){
+    override fun sum(a:Int, b:Int) = a*b
+}
+
+fun main(){
+    var s = Second()
+    println(s.sum(10,20))
+    println(s.sum(10,20,30))
+}
+```
+
+#### Abstract classes in Kotlin
+
+Abstract classes are those classes defined with abstract keyword. In an abstract class you can have methods with body and methods without a body. 
+
+Abstract classes cannot be instantiated on its own and must be subclassed. 
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+abstract class RBI{
+    fun homeloanInterestrate():Double{
+        return 8.5
+    }
+
+    abstract fun personalloanInterestrate():Double
+}
+
+class SBI : RBI(){
+    override fun personalloanInterestrate(): Double {
+        return 11.0
+    }
+}
+
+class ICICI : RBI(){
+    override fun personalloanInterestrate(): Double {
+        return 12.0
+    }
+}
+
+fun main(){
+    val s:SBI = SBI()
+    println(s.homeloanInterestrate())
+    println(s.personalloanInterestrate())
+}
+```
+
+#### Interfaces in Kotlin
+Interfaces are similar to interfaces in Java, but with some additonal features and more concise syntax. 
+
+***Declaring an Interface***
+
+```kotlin
+interface MyInterface{
+    fun myMethod()
+    val myProperty:String
+}
+```
+
+***Implementing an Interface***
+```kotlin
+interface MyInterface{
+    fun myMethod()
+    val myProperty:String
+}
+
+class MyClass:MyInterface {
+    override val myProperty:String = "Hello"
+    override fun myMethod() {
+        println("This is my method")
+    }
+}
+```
+
+***Default Implementation***
+Kotlin Interfaces can provide default implementation for methods. 
+
+```kotlin
+interface MyInterface{
+    fun myMethod(){
+        println("This is my method1")
+    }
+    val myProperty:String
+}
+
+class MyClass:MyInterface {
+    override val myProperty:String = "Hello"
+    override fun myMethod() {
+        println("This is my method2")
+    }
+}
+```
+
+***With interfaces, we can implement multiple inheritance***
+
+```kotlin
+interface A{
+    fun greet(){
+        println("Greet from A")
+    }
+}
+
+interface B{
+    fun greet(){
+        println("Greet from B")
+    }
+}
+
+class C:A, B{
+    override fun greet() {
+        super<A>.greet()
+        super<B>.greet()
+        println("Greet From Class C")
+    }
+}
+
+fun main(){
+    val obj = C()
+    obj.greet()
+}
+```
+
+#### Companion Object in Kotlin
+In Kotlin, a companion object is an **object that is declared inside a class** using the companion keyword.
+It allows you to **define members (like functions and variables) that belong to the class itself, not to an instance (object) of the class**- similar to static members in java. 
+
+***Why we use a companion Object ?***
+
+- To define constants or utility functions at the class level. 
+- To create factory methods or singleton patterns
+- To access members without creating an object of the class. 
+
+
+***Syntax***
+
+```kotlin
+class MyClass{
+    companion object{
+        const val CONST_VAL = 10
+        fun showMessage(){
+            println("Hello from companion object)
+        }
+    }
+}
+```
+
+```kotlin
+class A{
+    init {
+        increment()
+    }
+    companion object{
+        var count = 0
+        fun increment(){
+            count++
+        }
+    }
+}
+
+
+fun main(){
+    val a1 = A()
+    val a2 = A()
+    val a3 = A()
+    println(A.count)
+}
+```
