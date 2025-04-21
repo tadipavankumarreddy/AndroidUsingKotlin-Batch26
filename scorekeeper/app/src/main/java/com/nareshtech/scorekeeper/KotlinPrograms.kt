@@ -1,21 +1,7 @@
 package com.nareshtech.scorekeeper
 
-class A{
-    init {
-        increment()
-    }
-    companion object{
-        var count = 0
-        fun increment(){
-            count++
-        }
-    }
-}
-
-
-fun main(){
-    val a1 = A()
-    val a2 = A()
-    val a3 = A()
-    println(A.count)
+fun main() {
+    val words = listOf("apple", "banana", "apricot", "blueberry")
+    val grouped = words.groupBy { it.first() }
+    print(grouped)
 }

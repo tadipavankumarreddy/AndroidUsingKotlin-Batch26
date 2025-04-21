@@ -820,3 +820,216 @@ fun main(){
     println(A.count)
 }
 ```
+
+#### Lambdas and Higher Order Functions
+***What are Lambdas ?***
+A Lambda expression is a function that can be passed as a parameter and does not need to be declared explicitly. 
+
+They are anonymous functions. 
+
+**Syntax of a Lambda**
+
+```kotlin
+val lambdaName : (InputValue) - > ReturnType = {arguments -> body}
+```
+
+**Example**
+```kotlin
+fun main(){
+
+    val greet:(String) -> Unit = {name -> println("Helllo, $name")}
+
+    greet("Kotlin")
+}
+```
+
+***Simplified Lambda Syntax***
+
+Kotlin allows us to simplify Lambdas further
+
+**Remove Explicit Type**
+
+```kotlin
+val greet = {name:String -> println("Helllo, $name")}
+    greet("Kotlin")
+```
+
+**Single Parameter shortcut (it)**
+When there's only one parameter, you can use `it`:
+
+```kotlin
+fun main(){
+    val square = {it:Int -> it*it}
+    println(square(20))
+}
+```
+---
+
+#### Higher-Order function
+A Higher order function is a function that takes another function as a parameter or return a function. 
+
+Example 1: Passing a lambda as a parameter
+
+```kotlin
+fun main(){
+    val sum = calculate(4,5){x,y -> x+y}
+    println("Sum: $sum")
+
+    val product = calculate(4,5){x,y -> x*y}
+    println("Product: $product")
+}
+
+fun calculate(a:Int, b:Int, operation:(Int, Int) -> Int):Int{
+    return operation(a,b)
+}
+```
+
+***Explaination***
+1. `calculate` takes two integers (a , b) and a lambda funciton ``operation`.
+2. `operation` performs an action on a and b.
+
+---
+
+**Returning a Function**
+
+ A function can return another function
+
+ **Example**
+
+```kotlin
+fun main() {
+    val timesThree = createMultiplier(3)
+    val timesFive = createMultiplier(5)
+
+    println(timesThree(10))
+    println(timesFive(20))
+}
+
+fun createMultiplier(multiplier:Int):(Int) -> Int{
+    return {number -> number * multiplier}
+}
+```
+**Example**  
+***String Formatting using a higher order function***
+```kotlin
+fun main() {
+    val upper = formatString("naresh"){it -> it.uppercase()}
+    val lower = formatString("Naresh"){it -> it.lowercase()}
+    val reverse = formatString("Naresh"){it -> it.reversed()}
+    println(" $upper \n $lower \n $reverse")
+}
+
+fun formatString(value:String, formatter:(String) -> String):String{
+    return formatter(value)
+}
+```
+**Example**  
+***List Processing***
+```kotlin
+fun main() {
+    val originalList = listOf(1,2,3,4,5,6,7,8,9,10)
+    val squaredList = processList(originalList){it*it}
+    val doubleEach = processList(originalList){it*2}
+    println("original List $originalList")
+    println("Squared List $squaredList")
+    println("Doubled List $doubleEach")
+}
+
+fun processList(list: List<Int>, process:(Int)->Int):List<Int>{
+    return list.map(process)
+}
+```
+
+**Example**  
+```kotlin
+fun main() {
+   repeatAction(10){println("Naresh")}
+}
+
+fun repeatAction(times:Int, action:()-> Unit){
+    repeat(times){action()}
+}
+```
+
+**Example**   
+```kotlin
+fun main() {
+   val isEmail = validate("test@example.com"){it.contains("@")}
+    println(isEmail)
+
+    val isEmailHavingDot = validate("test@example.com"){it.contains(".")}
+    println(isEmailHavingDot)
+}
+
+fun validate(input:String, rule:(String) -> Boolean):Boolean{
+    return rule(input)
+}
+```
+
+---
+
+***Common Use Cases***
+
+**Example 1: Filtering a List**
+```kotlin
+fun main() {
+    val numbers = listOf(1,2,3,4,5,6,7,8,9,10)
+    val evenNumbers = numbers.filter { it%2 == 0 }
+    val notEvenNumbers = numbers.filter { it%2!==0 }
+
+    println("Original list: $numbers")
+    println("Even numbers: $evenNumbers")
+    println("Not Even Numbers: $notEvenNumbers")
+}
+```
+
+**Example 2: Mapping a list**
+```kotlin
+val doubled = numbers.map { it*2 }
+println(doubled)
+```
+
+**Example 3: Sorting a list**
+
+```kotlin
+fun main() {
+    val names = listOf("Alice", "Charlie", "Bob")
+    val sortedNames = names.sorted()
+    println(sortedNames)
+
+    // Sort the data based on length
+    val sortedNamesByLength = names.sortedBy { it.length }
+    println(sortedNamesByLength)
+}
+```
+
+**Example 4: for each**  
+
+```kotlin
+fun main() {
+    val fruits = listOf(1,2,3,4,5,6,7,8,9,10)
+    fruits.forEach { print("${it%2} ") }
+}
+```
+
+**Example 5: groupBy**
+```kotlin
+fun main() {
+    val words = listOf("apple", "banana", "apricot", "blueberry")
+    val grouped = words.groupBy { it.first() }
+    print(grouped)
+}
+```
+
+#### Assignments 
+1. Create a calculator using Higher Order functions
+   - **Task**: Write a function calculate that takes two Integers and a lambda that defines the operations (+,-,*,/).
+2. Custom map() function
+   - **Task**:Write a function that mimics the behavior of kotlin's built in map() function
+3. List operation with conditions
+   - **Task**:Given a list of strings, use filter, map and sortedBy to
+     - Filter names longer than 3 letters
+     - Convert them to uppercase
+     - sort by length
+    - Example Input:  ["Tom", "Jerry","Ana","Kotlin","Bob"]
+    - Ouput: ["JERRY","KOTLIN"]
