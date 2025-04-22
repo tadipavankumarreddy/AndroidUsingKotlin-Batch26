@@ -1033,3 +1033,148 @@ fun main() {
      - sort by length
     - Example Input:  ["Tom", "Jerry","Ana","Kotlin","Bob"]
     - Ouput: ["JERRY","KOTLIN"]
+
+Please explore other in built higher order functions such as `let`, `apply` and `run`.
+
+#### Data classes in KOtlin
+In Many programming scenarios, you create classes whose main purpose is to hold data. These classes often require you to write repetitive code for common functionalities like:
+- `euquals()` and `hashcode()` to compare instances(Objects) for equality
+- `toString()` to get human-readable representation of the object. 
+- `componentN()` functions for destructing declarations.
+- `copy()` to create a new instance with some properties changed. 
+
+Kotlin's data classes automatically generate these functions for you based on the properties declared in the primary constructor. 
+
+This makes code much clearer, more concise, and less error-prone. 
+
+***Syntax:***
+```kotlin
+data class User(val name:String, val age:Int)
+```
+
+***ComponetN() functions***
+```kotlin
+data class User(val name:String, val age:Int)
+
+fun main(){
+    val user = User("Diana", 28)
+    val userName = user.component1()
+    val age = user.component2()
+    println("$userName $age")
+}
+```
+
+***`copy()` function***
+- This function allows you to create a new instance of the data class with some or all of its properties changed, while keeping the others the same. 
+- It provides default values for all the primary constructor parameters, allowing you to selectively override them.
+
+```kotlin
+data class User(val name:String, val age:Int)
+
+fun main(){
+    val user1 = User("Diana", 28)
+    val user2 = user1.copy(age = 52)
+    val user3 = user1.copy(name = "John")
+    val user4 = user1.copy() // this creates the exact copy
+
+    println(user1)
+    println(user2)
+    println(user3)
+    println(user4)
+}
+```
+
+**Requirements for the Dataclass**  
+To be eligible to be a dataclass, a class must satisfy the following requirements:
+- The primary constructor needs to have at least one parameter
+- All primary constructor parameters need to be marked as `val` or `var`
+- Data classes cannot be `abstract`, `open`, `sealed` or `inner`.
+
+**Points to remember**
+Only the properties declared in the primary constructor are used by the compiler to automatically generate `equals()`, `hashcode()`, `toString()`, `componentN()` and `copy()` functions. Properties defined inside the class body (not in the primary constructor) are not considered for these generated functions. 
+
+```kotlin
+data class Person(val firstName:String, val lastName:String){
+    var fullName = "$firstName $lastName"
+}
+
+fun main()
+{
+    val person1 = Person("Naresh", "Tech")
+    val person2 = person1.copy(lastName = "IT")
+    println(person1.fullName)
+    println(person2.fullName)
+
+}
+```
+
+***use cases for data class***
+- `Data Transfer Objects (DTOs)` Representing data being transferred between different parts of the application or across network boundaries. 
+- `Entities:` Holding data representing objects in your domain model. 
+- `Configuration Objects:` storing application settings. 
+- `Records:` simple structures to hold related pieces of information.
+- `Working with COllections:` The automatically generated `equals()` and `hashcode()` make it easy to compare and manage collections of data class instances. 
+
+
+#### Thread
+- A thread represents an independent path of execution within a program. 
+- This is in place to achieve concurrency. 
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+fun main(){
+    println("Main Thread started")
+
+    // I want to create a worker thread for this main program to carryout a simple task.
+    val myThread = Thread{
+        // define what has to happen inside this block.
+        println("Worker Thread started")
+        Thread.sleep(2000)
+        println("Worker Thread finished")
+    }
+
+    myThread.start()
+
+    println("Main Thread continues.")
+    Thread.sleep(1000)
+    println("Main Thread finished")
+}
+```
+
+```kotlin
+package com.nareshtech.scorekeeper
+
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
+
+fun performHeavyTask():String{
+    println("Thread started heavy task...")
+    Thread.sleep(3000)
+    println("Thread finished heavy task...")
+    return "Heavy task completed"
+}
+
+fun main(){
+    println("Main starting the main thread..")
+
+    // use Completable functins for cleaner way to handle results
+    val futureResult = CompletableFuture<String>()
+
+    // Create and start a new thread
+    thread {
+        val result = performHeavyTask()
+        futureResult.complete(result)
+    }
+
+    println("Main Thread is doing other work...")
+    Thread.sleep(1000)
+    println("Main Thread is waiting for result...")
+    val finalResult = futureResult.get(5, TimeUnit.SECONDS)
+    println("Main received the result $finalResult")
+}
+```
+
+
+
