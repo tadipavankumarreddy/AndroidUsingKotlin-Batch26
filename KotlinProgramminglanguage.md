@@ -1176,5 +1176,141 @@ fun main(){
 }
 ```
 
+#### Assignment - Solution
+2. Custom map() function
+   - **Task**:Write a function that mimics the behavior of kotlin's built in map() function
 
+```kotlin
+// custom implementation of map() function
+fun <T, R> List<T>.customMap(transform: (T) -> R):List<R>{
+    // Create an empty mutable list of type R - to store transformed elements
+    val result = mutableListOf<R>()
+
+    // Iterate over each element in the original list
+    for(item in this){
+        // Apply the transformation and add the result
+        result.add(transform(item))
+    }
+
+    return result
+}
+
+fun main(){
+    val numbers = listOf(1,2,3,4)
+
+    val tripled = numbers.customMap { it*3 }
+
+    println(tripled)
+    
+    val stringified = numbers.customMap { "Number:$it" }
+    
+    println(stringified)
+    
+}
+```
+
+**Let's understand each part in the method declaration**
+
+```kotlin
+fun <T, R> List<T>.customMap(transform: (T) -> R):List<R>
+```
+
+1. `fun`
+   - This indicates we are declaring a function in Kotlin
+2. <T,R>
+   - These are generic type placeholders:
+     - `T` is the type of each element in the original list
+     - `R` is the type of each element in the resulting list after applying the transformation
+   - This makes your function flexible and reusable with any data types - `Int`, `String`, `Float`, custom classes etc.,
+3. List<T>.customMap(...) - extension function
+   - This part means you're defining a function called  `customMap` on the `List<T>` type
+     - `list<T>:` you are extending the kotlin list class, meaning this function can be called directly on any list like
+   - 
+   ```kotlin
+   val result = listOf(1,2,3).customMap{it*2}
+   ```
+   - This is what makes it feel like a built-in method, just like `map` or `filter` 
+4. transform: (T)->R - Function Parameter
+   - This defines a lambda (higher-order function) parameter named transform.
+     - It takes an input of type T
+     - It returns a value of type R
+5. :List<R>
+   - This specifies that the function returns a List<R>
+     - A list of elements that are the result of applying the `transform` function to each item in the original list. 
+
+#### Co-Routines
+
+Coroutines are a kotlin feature that simplify asynchronous programming. They allow you to write code that looks synchronous but executes asynchronously and non-blocking under the hood.
+
+Coroutines are light weight threads that allow concurrency without the overhead of traditional threads. 
+
+***Why coroutines ?***
+- Light weight : Coroutines are much lighter than threads
+- Non-Blocking : Avoids blocking threads while waiting for data. 
+- Structured Concurrency : Makes it easier to manage scopes and cancellations
+- Simpler Syntax: makes asynchronous code easier to write and read. 
+
+***Basic Coroutine Concepts***
+1. runBlocking
+   - runBlocking is a coroutine builder that bridges the non-coroutine world (like main() function or tests) and the coroutine world
+   - It starts a new coroutine and blocks the current thread until its completion.
+   - Best used in main() or test functions, NOt in Production android code. 
+```kotlin
+import kotlinx.coroutines.*
+
+fun main(){
+    println("Thread: ${Thread.currentThread().name}")
+
+    runBlocking {
+        println("runBlocking: ${Thread.currentThread().name}")
+        delay(1000L)
+        println("runBlocking is done with the task")
+    }
+
+    println("Thread: ${Thread.currentThread().name}")
+}
+```
+2. launch
+   - A coroutine builder Used to launch a new coroutine without blocking the current thread
+   - Returns a job object that can be used to cancel the coroutine or wait for its completion. 
+3. delay
+   - A suspending function that delays the coroutine without blocking the thread.
+   - Unlike, Thread.sleep(), delay() does not block the thread, making it much efficient. 
+4. suspend functions
+   - `suspend` modifier allows a function to be called from a coroutine or another suspend function. 
+   - Such functions can perform long-running operations without blocking.
+5. async & await
+   - async is used to start a coroutine that computes a result.
+   - Retruns a Deferred which represents a promise of a result. 
+   - await() is used to get the result of the Deferred.
+```kotlin
+package com.nareshtech.scorekeeper
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    val start = System.currentTimeMillis()
+    val deferred1 = async { doWork1() }
+    val deferred2 = async { doWork2() }
+
+    println("Result: ${deferred1.await()} and ${deferred2.await()}")
+
+    val end = System.currentTimeMillis()
+    println("Time taken: ${end - start} ms")
+}
+
+suspend fun doWork2():String {
+    delay(1000L)
+    return "Work2"
+}
+
+suspend fun doWork1():String {
+    delay(1000L)
+    return "work1"
+}
+```
+6. withContext
+7. CoroutineScope & Dispatcher
+8. Coroutine Cancellation
+9.  TimeOut
 

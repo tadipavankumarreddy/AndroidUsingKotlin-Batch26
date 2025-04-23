@@ -1,31 +1,24 @@
 package com.nareshtech.scorekeeper
 
-import java.util.concurrent.CompletableFuture
-import java.util.concurrent.TimeUnit
-import kotlin.concurrent.thread
+import kotlinx.coroutines.*
 
-fun performHeavyTask():String{
-    println("Thread started heavy task...")
-    Thread.sleep(3000)
-    println("Thread finished heavy task...")
-    return "Heavy task completed"
+fun main() = runBlocking {
+    val start = System.currentTimeMillis()
+    val deferred1 = async { doWork1() }
+    val deferred2 = async { doWork2() }
+
+    println("Result: ${deferred1.await()} and ${deferred2.await()}")
+
+    val end = System.currentTimeMillis()
+    println("Time taken: ${end - start} ms")
 }
 
-fun main(){
-    println("Main starting the main thread..")
+suspend fun doWork2():String {
+    delay(1000L)
+    return "Work2"
+}
 
-    // use Completable functins for cleaner way to handle results
-    val futureResult = CompletableFuture<String>()
-
-    // Create and start a new thread
-    thread {
-        val result = performHeavyTask()
-        futureResult.complete(result)
-    }
-
-    println("Main Thread is doing other work...")
-    Thread.sleep(1000)
-    println("Main Thread is waiting for result...")
-    val finalResult = futureResult.get(5, TimeUnit.SECONDS)
-    println("Main received the result $finalResult")
+suspend fun doWork1():String {
+    delay(1000L)
+    return "work1"
 }
