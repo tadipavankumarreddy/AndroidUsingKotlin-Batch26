@@ -2,23 +2,24 @@ package com.nareshtech.scorekeeper
 
 import kotlinx.coroutines.*
 
+/***
+ * Task A: Fetch user from Database
+ * Task B: Send welcome email to that user.
+ */
+
+suspend fun fetchUser():User {
+    delay(5000)
+    return User("John", "Doe")
+
+}
+suspend fun sendWelcomeEmail(user:User){
+    delay(500)
+    println("Welcome ${user.s} ${user.s1}")
+}
+data class User(val s: String, val s1: String)
+
 fun main() = runBlocking {
-    val start = System.currentTimeMillis()
-    val deferred1 = async { doWork1() }
-    val deferred2 = async { doWork2() }
-
-    println("Result: ${deferred1.await()} and ${deferred2.await()}")
-
-    val end = System.currentTimeMillis()
-    println("Time taken: ${end - start} ms")
-}
-
-suspend fun doWork2():String {
-    delay(1000L)
-    return "Work2"
-}
-
-suspend fun doWork1():String {
-    delay(1000L)
-    return "work1"
+    val userDeferred = async { fetchUser() }
+    val user = userDeferred.await()
+    sendWelcomeEmail(user)
 }

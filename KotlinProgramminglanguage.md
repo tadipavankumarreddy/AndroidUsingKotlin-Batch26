@@ -1310,7 +1310,180 @@ suspend fun doWork1():String {
 }
 ```
 6. withContext
+   - Used to switch the coroutine context (like moving from IO thread to Main Thread or vice versa)
+   - It is a suspending function that changes the context and returns the result of the block.
+```kotlin
+import kotlinx.coroutines.*
+
+fun main() = runBlocking{
+    println("Current Thread is ${Thread.currentThread().name}")
+    val result = withContext(Dispatchers.IO){
+        println("Current Thread is ${Thread.currentThread().name}")
+        delay(1000L)
+        "Fetched Data"
+    }
+
+    println(result)
+}   
+```
 7. CoroutineScope & Dispatcher
+   - CoroutineScope defines the scope of the new Coroutines.
+   - Dispatchers define the thread or thread pool on which the coroutine runs.
+     - Dispatchers.Default: CPU-intensive tasks
+     - Dispatchers.IO : Network or Disk I/O 
+     - Dispatchers.Main: UI-related tasks (Not used in pure kotlin)
+     - Dispatchers.Unconfined: Inherits parent context but starts unconfined.
+```kotlin
+package com.nareshtech.scorekeeper
+
+import kotlinx.coroutines.*
+
+fun main(): Unit = runBlocking{
+    println("Current Thread is ${Thread.currentThread().name}")
+    launch(Dispatchers.Default) {
+        println("Current Thread is ${Thread.currentThread().name}")
+    }
+    launch(Dispatchers.IO){
+        println("Current Thread is ${Thread.currentThread().name}")
+    }
+    launch(Dispatchers.Unconfined){
+        println("Current Thread is ${Thread.currentThread().name}")
+    }
+}
+```
 8. Coroutine Cancellation
+```kotlin
+package com.nareshtech.scorekeeper
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking{
+    val job:Job = launch(Dispatchers.IO) {
+        repeat(5){
+            i ->
+            println("Job:working on $i")
+            delay(500)
+        }
+    }
+    delay(1300L)
+    println("Main:Cancelling job")
+    job.cancel()
+    job.join()
+    println("Main:Job is cancelled")
+}
+```
 9.  TimeOut
+    - In Kotlin, you can limit how long a coroutine runs using `withTimeout` or `withTimeoutOrNull` functions
+```kotlin
+import kotlinx.coroutines.*
+
+fun main() = runBlocking{
+    try{
+        withTimeout(2000){
+            repeat(10){
+                println("Working on $it")
+                delay(500)
+            }
+        }
+    }catch (e:TimeoutCancellationException){
+        println("Timeout Occured!")
+    }
+}
+```
+
+```kotlin
+import kotlinx.coroutines.*
+import java.lang.Exception
+
+fun main() = runBlocking{
+    try{
+        val result = withTimeoutOrNull(2000){
+            repeat(10){
+                println("Working on $it")
+                delay(500)
+            }
+            "Done"
+        }
+        println("Result is $result")
+    }catch (e:TimeoutCancellationException){
+        println("Timeout Occured!")
+    }
+}
+```
+10. Coroutine builders summary
+- launch (Fire and Forget)
+- async - returns a result (Deferred)
+- runBlocking - Bridges blocking and non-blocking worlds (not used in Android)
+- withContext - switches the coroutine context across (Dispatchers.IO, Dipatchers.Main and Dispatchers.Default)
+
+
+**Two tasks are there - Task B Dependent on Task A's result. How to handle this scenario ?**
+
+**Option 1: sequentially using suspend function**
+```kotlin
+import kotlinx.coroutines.*
+
+/***
+ * Task A: Fetch user from Database 
+ * Task B: Send welcome email to that user.
+ */
+
+suspend fun fetchUser():User {
+    delay(1000)
+    return User("John", "Doe")
+
+}
+suspend fun sendWelcomeEmail(user:User){
+    delay(500)
+    println("Welcome ${user.s} ${user.s1}")
+}
+data class User(val s: String, val s1: String)
+
+fun main() = runBlocking {
+    val user = fetchUser()
+    sendWelcomeEmail(user)
+}
+```
+**Option 2: Using `async` if you want flexibility or parlleism**
+```kotlin
+/***
+ * Task A: Fetch user from Database
+ * Task B: Send welcome email to that user.
+ */
+
+suspend fun fetchUser():User {
+    delay(5000)
+    return User("John", "Doe")
+
+}
+suspend fun sendWelcomeEmail(user:User){
+    delay(500)
+    println("Welcome ${user.s} ${user.s1}")
+}
+data class User(val s: String, val s1: String)
+
+fun main() = runBlocking {
+    val userDeferred = async { fetchUser() }
+    val user = userDeferred.await()
+    sendWelcomeEmail(user)
+}
+```
+
+**Summary**
+- Use supend to mark a function that can be paused.
+- use launch for fire-and-forget operations
+- use async & await for concurrent computations with results
+- Use withContext to switch between the dispatchers.
+- runBlocking should be used only in main functions or test cases. 
+- Avoid using blocking code (Thread.sleep) in coroutines. 
+
+
+
+
+[Official Documentation](https://kotlinlang.org/docs/coroutines-overview.html)
+
+
+---
+END
+---
 
