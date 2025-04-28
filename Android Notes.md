@@ -20,3 +20,20 @@ Jetpack compose is android's modern toolkit for building native UI. It simplifie
 #### Assignment
 Just Go through compose basics and design the app by understanding the Column, Row, Box, Text, Button.
 
+***mutableStateOf()*** This is the function used to track a variable for the data changes happening. This will also auto trigger UI updates when it changes. 
+
+**Specifically:**
+- It is often created using mutableStateOf()
+- When you change a mutable state, any composables that read the state will automatically recompose (refresh)
+
+**remember{}** -> keep the state alive across recompositions.
+
+#### ViewModel
+ViewModel in android is a calss that is used to store and manage UI releted Data in a life cycle aware way.
+
+***Why is it important ?***
+- In android, things like Activity and Fragment can be destroyed and recreated (for Example, when you rotate the phone. )
+- Normally, if you store data inside an activity (say, a list of names), it gets lost when the activity is recreated. 
+- ViewModel helps by holding the data seperately  so that even if your activity/fragment is recreated, the data survives. 
+- View Model is part of Android Jetpack libraries. 
+- Combine ViewModel + mutableStateOf() to make jetpack compose apps powerful.
