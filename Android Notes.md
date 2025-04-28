@@ -20,7 +20,7 @@ Jetpack compose is android's modern toolkit for building native UI. It simplifie
 #### Assignment
 Just Go through compose basics and design the app by understanding the Column, Row, Box, Text, Button.
 
-***mutableStateOf()*** This is the function used to track a variable for the data changes happening. This will also auto trigger UI updates when it changes. 
+***mutableStateOf()***  is a function used to create a state holder that tracks changes to a variable. When the variable changes, it automatically triggers UI updates in Jetpack Compose.
 
 **Specifically:**
 - It is often created using mutableStateOf()
