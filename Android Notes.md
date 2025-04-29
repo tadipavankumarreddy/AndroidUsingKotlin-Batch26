@@ -37,3 +37,4 @@ ViewModel in android is a calss that is used to store and manage UI releted Data
 - ViewModel helps by holding the data seperately  so that even if your activity/fragment is recreated, the data survives. 
 - View Model is part of Android Jetpack libraries. 
 - Combine ViewModel + mutableStateOf() to make jetpack compose apps powerful.
+
