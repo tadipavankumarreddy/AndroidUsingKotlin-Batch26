@@ -191,3 +191,14 @@ private fun RegistrationScreen()
 
 🔗 Reference: [@Preview - Compose Docs](https://developer.android.com/reference/kotlin/androidx/compose/ui/tooling/preview/Preview)
 
+### Intents in Android
+Intents are messaging objects that are sent to the android OS, the OS then takes a call to address these requests. 
+
+**Intents**  
+- Explicit Intents
+  - An Explicit intnet directly specifies the target component (Activity, Service, etc.,) it wants to start. You can use this when you know exactly where you want to go in your own app.
+  - Eg: Navigating from one activity to another activity
+
+- Implicit Intents
+  - An Implicit intent does not name a specific component. Instead, it declares a general action to perform, and the android system find the best app to handle the action.
+  - Eg: Opening a webpage in a browser

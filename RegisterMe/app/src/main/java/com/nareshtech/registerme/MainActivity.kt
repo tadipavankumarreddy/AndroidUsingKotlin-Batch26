@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
@@ -62,12 +64,14 @@ class MainActivity : ComponentActivity() {
         var languages = listOf("Tel","Eng","Hin","Tam")
         val selectedLangues = remember { mutableStateListOf<String>() }
 
+        var scrollState = rememberScrollState()
         // New variable for storing the data
         var submittedData by remember { mutableStateOf("") }
 
         Column(modifier = Modifier.padding(16.dp)
             .fillMaxSize()
             .background(Color.White)
+            .verticalScroll(scrollState)
             .padding(WindowInsets.statusBars.asPaddingValues())
             .padding(WindowInsets.navigationBars.asPaddingValues())) {
 
