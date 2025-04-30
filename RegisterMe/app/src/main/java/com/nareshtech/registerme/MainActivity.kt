@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -23,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,6 +59,11 @@ class MainActivity : ComponentActivity() {
        var name by remember { mutableStateOf("") }
         var age by remember { mutableStateOf("") }
         var gender by remember { mutableStateOf("") }
+        var languages = listOf("Tel","Eng","Hin","Tam")
+        val selectedLangues = remember { mutableStateListOf<String>() }
+
+        // New variable for storing the data
+        var submittedData by remember { mutableStateOf("") }
 
         Column(modifier = Modifier.padding(16.dp)
             .fillMaxSize()
@@ -95,6 +103,37 @@ class MainActivity : ComponentActivity() {
                     onClick = {gender = "Female"})
                 Text("Female")
             }
+
+            // Let the user select multiple Languages
+            Text("Languages Known", fontWeight = FontWeight.Bold)
+            Row(modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround){
+
+                languages.forEach { language ->
+                    Checkbox(checked = selectedLangues.contains(language), onCheckedChange = {
+                        if(it) selectedLangues.add(language) else selectedLangues.remove(language)
+                    })
+
+                    Text(text = language, modifier = Modifier.weight(1f))
+                }
+
+            }
+
+            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                submittedData = "Name:$name\nAge:$age\nGender$gender\nLanguages:${selectedLangues.joinToString(",")}"
+            }) {
+                Text("Submit")
+            }
+
+            // Displaying submitted data
+            if(submittedData.isNotEmpty()){
+                Text(text = submittedData,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth())
+            }
+
         }
     }
 }
