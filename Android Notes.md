@@ -202,3 +202,14 @@ Intents are messaging objects that are sent to the android OS, the OS then takes
 - Implicit Intents
   - An Implicit intent does not name a specific component. Instead, it declares a general action to perform, and the android system find the best app to handle the action.
   - Eg: Opening a webpage in a browser
+
+### What is a context in Android ?
+Context is a handle to the system. It gives your app access to everything android provides - like resources, launching activities, accessing databases, systems and services,etc.,
+
+**Types Of Context**  
+1. Activity Context (This is inside an Activity)
+   - Tied to the Activity's lifecycle
+   - Use when dealing with UI or starting other activities.
+2. ApplicationContext (getApplicationContext())
+   -  Tied to the app's lifecycle.
+   -  Use when you don't need the UI or Activity (e.g., from a background service)
