@@ -213,3 +213,47 @@ Context is a handle to the system. It gives your app access to everything androi
 2. ApplicationContext (getApplicationContext())
    -  Tied to the app's lifecycle.
    -  Use when you don't need the UI or Activity (e.g., from a background service)
+
+**Activity Result Launcher**  
+***What is it ?***
+ActivityResultLauncher is a modren way to Start an **Activity and get a result back** from it, replacing the older ***startActivityForResult()*** and ***onActivityResult()*** methods. 
+
+***Why use it ?***
+- Simpler and lifecycle-aware
+- Prevents memory leaks
+- Automatically handles configuration changes (like Screen rotations)
+- Clean Separation of Logic
+
+***Code Steps to Follow***
+
+**Step 1:**  
+```kotlin
+val launcher  = registerForActivityResult{(ActivityResultContracts.StartActivityForResult())
+{result:ActivityResult->
+val data = result.data?.getStringExtra("key")
+Toast.makeText(applicationContext,data,Toast.LENGTH_LONG).show()
+}
+```
+
+**Step 2**
+```kotlin
+ val i = Intent(applicationContext,SecondActivity::class.java)
+i.putExtra("KEY",name)
+/*startActivity(i)*/
+launcher.launch(i)
+```
+**Step 3**
+```kotlin
+val resultIntent = Intent()
+resultIntent.putExtra("key","Thank you!")
+setResult(RESULT_OK,resultIntent)
+finish()
+```
+
+### Common Intents (Implicit Intents present in most of the devices)
+
+[Follow this link to use more of them](https://developer.android.com/guide/components/intents-common)
+
+***Assignment:***
+Please try another two or three common intents. Drop me an email once you are done. pavankreddy.t@gmail.com
+

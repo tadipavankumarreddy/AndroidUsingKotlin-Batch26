@@ -3,9 +3,12 @@ package com.nareshtech.intents
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +30,15 @@ import androidx.compose.ui.unit.dp
 import com.nareshtech.intents.ui.theme.IntentsTheme
 
 class MainActivity : ComponentActivity() {
+
+    val launcher  = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+            result:ActivityResult->
+        val data = result.data?.getStringExtra("key")
+        Toast.makeText(applicationContext,data,Toast.LENGTH_LONG).show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,7 +59,10 @@ class MainActivity : ComponentActivity() {
                             // TODO: We shall write code using explicit intents and navigate to a new Activity.
                             val i = Intent(applicationContext,SecondActivity::class.java)
                             i.putExtra("KEY",name)
-                            startActivity(i)
+                            /*startActivity(i)*/
+                            if(name.isNotEmpty()){
+                                launcher.launch(i)
+                            }
                         },
                             modifier = Modifier.padding(innerPadding).fillMaxWidth()) {
                             Text(text = "Click me!")
