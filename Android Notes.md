@@ -440,3 +440,8 @@ Scaffold(
 
 ---
 
+### App Flow
+1. HomeScreen -> Selecting the brand (Oppo, samsung, Nothing, etc.,)
+2. VariantScreen -> Select Variant (8GB|128GB, 8GB|256GB)
+3. Summary Screen -> Display Brand + Variant Selected.
+
