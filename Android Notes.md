@@ -445,3 +445,60 @@ Scaffold(
 2. VariantScreen -> Select Variant (8GB|128GB, 8GB|256GB)
 3. Summary Screen -> Display Brand + Variant Selected.
 
+## 📘 **Assignment: Laptop Customization App using ViewModel + Jetpack Compose Navigation**
+
+### 🎯 Objective:
+
+Build a simple 3-screen app that lets users customize and order a laptop. Use `ViewModel` to store user choices across screens without passing parameters explicitly.
+
+---
+
+### 🧩 Screens & Flow:
+
+1. **HomeScreen** – Choose a laptop brand using radio buttons
+
+   * Dell
+   * HP
+   * Lenovo
+   * Apple
+   * Asus
+     ➡️ On clicking "Next", move to the ConfigScreen
+
+2. **ConfigScreen** – Select configuration (RAM + SSD)
+
+   * 8GB RAM | 256GB SSD
+   * 16GB RAM | 512GB SSD
+   * 32GB RAM | 1TB SSD
+     ➡️ On clicking "Next", move to SummaryScreen
+
+3. **SummaryScreen** – Show the selected brand and config
+   ➡️ Display message: `"You have selected {brand} with {config}."`
+
+---
+
+### ✅ Requirements:
+
+* Use **Jetpack Compose Navigation**.
+* Use a **shared ViewModel** to store selections (brand & config).
+* Do **not** pass arguments between screens via navigation.
+* Use `viewModel()` inside each screen to access the same instance.
+* Use clean, readable UI (spacing, alignment, etc.).
+
+---
+
+### 🏁 Bonus Challenge (Optional):
+
+Add a “Clear Selection” button on the SummaryScreen to:
+
+* Clear the ViewModel state
+* Navigate back to HomeScreen
+
+---
+
+### 💡 Tips:
+
+* Use `remember` for temporary state (radio button selection).
+* Use `mutableStateOf` and `State` in ViewModel to observe changes.
+* Wrap everything in a `NavHost` inside your `MainActivity`.
+
+---
