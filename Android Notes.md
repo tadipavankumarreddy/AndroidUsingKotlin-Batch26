@@ -502,3 +502,104 @@ Add a “Clear Selection” button on the SummaryScreen to:
 * Wrap everything in a `NavHost` inside your `MainActivity`.
 
 ---
+
+#### Sealed Classes in Kotlin
+Imagine that you're designing a system to handle different types of results from an operation. Let's say this operation can either succeed with a valu, fail with an error, or still be in loading.
+
+Without using sealed classes
+
+```Kotlin
+class Result {
+    var d:String? = null
+    var error:String? = null
+    var isLoading:Boolean = false
+    
+    companion object {
+        fun success(v:String):Result{
+            val result = Result()
+            result.d = v
+            return result
+        }
+        
+        fun failure(error:String):Result{
+            val result = Result()
+            result.error = error
+            return result
+        }
+        
+        fun loading():Result{
+            val result = Result()
+            result.isLoading = true
+            return result
+        }
+    }
+}
+
+
+fun processResult(result:Result){
+    if(result.isLoading){
+        println("Loading...")
+    } else if(result.d!=null){
+        println("Success: ${result.d}")
+    } else if(result.error!=null){
+        println("Error: ${result.error}")
+    }
+}
+
+fun main(){
+    val successResult = Result.success("Data Fetched!")
+    val errorResult = Result.failure("Network Error")
+    val loadingResult = Result.loading()
+    
+    processResult(successResult)
+    processResult(errorResult)
+    processResult(loadingResult)
+		   
+}
+```
+
+This approach works, but it has its own drawbacks:
+- It's easy to have invalid states
+
+Sealed Classes are those classes that restrict the possible subclasses of a class within the same file. This gives you more control and makes your code safer. 
+
+```kotlin
+sealed class Result {
+   data class Success(val v:String):Result()
+   data class Failure(val error:String):Result()
+   object Loading : Result()
+}
+
+
+fun processResult(result:Result){
+    when (result){
+        is Result.Success -> println("Succes:${result.v}")
+        is Result.Failure -> println("Error:${result.error}")
+        is Result.Loading -> println("Loading...")
+    }
+}
+
+fun main(){
+    val successResult = Result.Success("Data Fetched!")
+    val errorResult = Result.Failure("Network Error")
+    val loadingResult = Result.Loading()
+    
+    processResult(successResult)
+    processResult(errorResult)
+    processResult(loadingResult)
+		   
+}
+```
+
+**Key things to note:**
+- We declare `Result` as `sealed class`.
+- The different possible states (`Success`,`Failure`,`Loading`) are defined as subclasses within the `Result` Sealed class.
+- `Success` and `Failure` are `data class`es, which automatically provide useful methods like `equals()`, `hashCode()`, and `toString()`.
+- `Loading` is an `object` because it doesn't need any additional data - There's only one "Loading" state. 
+- In the processResult function, the when expression is now exhaustive. The kotlin compiler knows all the possible subtypes of a `Result` because they are all defined within the same file. This means you don't need an else branch, and the compiler will even warn you if you forget to handle any of the subtypes!
+
+Why Sealed Classes ?
+- Type Safety is Enhanced: Sealed classes restrict the possible types, making it impossible to represent invalid or illogical states. 
+- Exhaustive When expressions: This is a huge advantage. When you use a when expression with sealed class, the compiler ensures you handle all the possible subtypes. This makes your code more robust and less prone to runtime errors because you won't forget to handle specific case. 
+- Improved Code readability and Maintainability
+- Better control over inheritance.
