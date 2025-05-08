@@ -603,3 +603,17 @@ Why Sealed Classes ?
 - Exhaustive When expressions: This is a huge advantage. When you use a when expression with sealed class, the compiler ensures you handle all the possible subtypes. This makes your code more robust and less prone to runtime errors because you won't forget to handle specific case. 
 - Improved Code readability and Maintainability
 - Better control over inheritance.
+
+### Jetpack Compose : Displying large data sets.
+
+- Jetpack compose provides `LazyColumn`, `LazyRow` and `LazyVerticalGrid` for efficiently displaying large or infinite lists. 
+- These components render only the items visible on the screen, improves performance & memory usage - Similar to RecyclerView.
+
+[Official Docs](https://developer.android.com/develop/ui/compose/lists)
+
+**Steps**
+
+1. Prepare Data
+2. Create a Design for each item  that you want to display
+3. Use LazyColumn, LazyRow and LazyVerticalGrid to show the items. 
+
