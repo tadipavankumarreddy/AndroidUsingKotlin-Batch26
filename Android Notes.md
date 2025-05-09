@@ -617,3 +617,5 @@ Why Sealed Classes ?
 2. Create a Design for each item  that you want to display
 3. Use LazyColumn, LazyRow and LazyVerticalGrid to show the items. 
 
+[RecyclerView](https://docs.google.com/presentation/d/1nFJqH0OSSZmjaycRzEGE6vvsm6jlxghQyoO15KKbkwc/edit?slide=id.gf0dd569a47_0_129#slide=id.gf0dd569a47_0_129)
+

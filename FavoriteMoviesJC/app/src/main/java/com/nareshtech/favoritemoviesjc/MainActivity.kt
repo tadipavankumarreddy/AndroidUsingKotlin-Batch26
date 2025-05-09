@@ -44,6 +44,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.nareshtech.favoritemoviesjc.ui.theme.FavoriteMoviesJCTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,30 +57,51 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FavoriteMoviesJCTheme {
-                MoviesList(context = applicationContext,movies = prepareData())
+                AppNavigator(applicationContext)
             }
+        }
+    }
+}
+
+// TODO 6: After adding the Navigation Compose dependency, creating a function to handle the nav controller and NavHost
+@Composable
+fun AppNavigator(context: Context){
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "movies_list"){
+        composable("movies_list") {
+            MoviesList(context, movies = prepareData(), navController)
+        }
+        composable("movie_detail/{movieIndex}") { backStackEntry ->
+            val index = backStackEntry.arguments?.getString("movieIndex")?.toInt() ?: 0
+            DetailItem(movie = prepareData()[index])
         }
     }
 }
 
 // TODO 5: MoviesList
 @Composable
-fun MoviesList(context:Context,movies:List<FavMovies>){
+fun MoviesList(context:Context,movies:List<FavMovies>, navController: NavController){
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         modifier = Modifier.padding(WindowInsets.statusBars.asPaddingValues())
             .padding(WindowInsets.navigationBars.asPaddingValues())
     ) {
-      items(movies){
-          MovieItem(context,it)
+      items(movies.size) {index->
+          MovieItem(context,movies[index]){
+              navController.navigate("movie_detail/$index")
+          }
+          Spacer(modifier = Modifier.height(16.dp))
       }
     }
 }
 
 // TODO 4: Design one Item
 @Composable
-fun MovieItem(context:Context,movie:FavMovies){
+fun MovieItem(context:Context,movie:FavMovies, onClick:()->Unit){
     Column(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier.padding(8.dp).clickable{
+            onClick()
+        },
         horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(movie.image),
             contentDescription = movie.movieName,
