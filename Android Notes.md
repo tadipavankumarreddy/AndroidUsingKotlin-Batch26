@@ -619,3 +619,20 @@ Why Sealed Classes ?
 
 [RecyclerView](https://docs.google.com/presentation/d/1nFJqH0OSSZmjaycRzEGE6vvsm6jlxghQyoO15KKbkwc/edit?slide=id.gf0dd569a47_0_129#slide=id.gf0dd569a47_0_129)
 
+### Android Prototyping
+To understand the visual representation of our app's functionality, it is a great idea to create prototypes. 
+
+1. Figma
+2. Adobe XD
+3. Android Studio (XML + Navigtation Component)
+4. Balsamiq or Wireframe
+5. proto.io/Marvel/inVision
+
+For Shoes app, the data is ready as a [json file](https://raw.githubusercontent.com/tadipavankumarreddy/AndroidUsingKotlin-Batch26/refs/heads/master/shoesdata.json) 
+
+Going to use
+- Coroutines 
+- HttpsURLConnection
+- Kotlinx.seralization
+- LazyVerticalGrid
+- 
