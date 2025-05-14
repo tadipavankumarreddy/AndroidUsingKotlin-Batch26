@@ -1,4 +1,4 @@
-package com.nareshtech.shoemart
+package com.nareshtech.shoemart.data
 
 import android.annotation.SuppressLint
 import kotlinx.serialization.Serializable
