@@ -13,6 +13,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.nareshtech.shoemart.data.Shoe
 import com.nareshtech.shoemart.data.ShoeViewModel
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +49,9 @@ fun ShoeApp(viewModel: ShoeViewModel){
         }
     }*/
 
+    // TODO 9.2 : Create NavController & NavHost with appropriate data
+    val navController = rememberNavController()
+
     // TODO 7: Ctnd
     if(isLoading){
         Box(modifier = Modifier.fillMaxSize(),
@@ -53,6 +59,22 @@ fun ShoeApp(viewModel: ShoeViewModel){
             CircularProgressIndicator()
         }
     }else{
-        ShoeGrid(shoes = shoes)
+        NavHost(navController = navController, startDestination = "ShoeList"){
+            composable("ShoeList"){
+                ShoeGrid(shoes = viewModel.shoe_list){ selectedShoe ->
+                    navController.navigate("ShoeDetails/${selectedShoe.id}")
+                }
+            }
+
+            composable("ShoeDetails/{shoeId}") { backStackEntry ->
+                val shoeId = backStackEntry.arguments?.getString("shoeId")?.toIntOrNull()
+                val shoe = viewModel.getShoeById(shoeId)
+                shoe?.let{
+                    ShoeDetailsScreen(shoe = it)
+                }
+            }
+
+
+        }
     }
 }

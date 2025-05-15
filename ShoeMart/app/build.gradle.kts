@@ -45,6 +45,9 @@ dependencies {
     // TODO 1: Add Dependencies (Serialization, ImageLoading)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    // TODO 9.1: add navigation components dependency
+    implementation("androidx.navigation:navigation-compose:2.9.0")
+    // TODO 8: Add Internet Permission for networking
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

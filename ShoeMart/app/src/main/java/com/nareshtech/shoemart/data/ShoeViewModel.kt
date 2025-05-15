@@ -31,4 +31,9 @@ class ShoeViewModel: ViewModel() {
             }
         }
     }
+
+    // TODO 9.0: Implementing DetailsScreen to display all the related information about a certain shoe item.
+    fun getShoeById(id:Int?):Shoe?{
+        return shoe_list.find { it.id == id }
+    }
 }

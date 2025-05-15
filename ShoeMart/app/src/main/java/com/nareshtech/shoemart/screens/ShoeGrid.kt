@@ -17,7 +17,7 @@ import com.nareshtech.shoemart.data.Shoe
 
 // TODO 6: Create a LazyVerticalGrid
 @Composable
-fun ShoeGrid(shoes: List<Shoe>){
+fun ShoeGrid(shoes: List<Shoe>, onItemClick: (Shoe) -> Unit){
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
@@ -27,7 +27,7 @@ fun ShoeGrid(shoes: List<Shoe>){
             .padding(WindowInsets.navigationBars.asPaddingValues())
     ) {
         items(shoes) { shoe->
-            ShoeItem(shoe)
+            ShoeItem(shoe, onClick = {onItemClick(shoe)})
         }
     }
 }

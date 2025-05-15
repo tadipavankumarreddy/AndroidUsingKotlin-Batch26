@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!--TODO 1.2 Add Internet Permission for networking-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--TODO 8.1 : Adding ACCESS_NETWORK_STATE Permission-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
