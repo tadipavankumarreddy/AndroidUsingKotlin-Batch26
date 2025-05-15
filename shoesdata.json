@@ -4,7 +4,7 @@
     "name": "Nike Air Force 1",
     "brand": "Nike",
     "type": "Sneakers",
-    "price": "₹7,495",
+    "price": 7495,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
     "img": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b7d9211c-26e7-431a-ac24-b0540fb3c00f/AIR+FORCE+1+%2707.png"
   },
@@ -13,7 +13,7 @@
     "name": "Adidas Stan Smith",
     "brand": "Adidas",
     "type": "Sneakers",
-    "price": "₹8,999",
+    "price": 8999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
     "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/08fc0ad2aef34cce8ac7ac3200a278a6_9366/Stan_Smith_Shoes_Black_FX5499_01_standard.jpg"
   },
@@ -22,7 +22,7 @@
     "name": "Converse Chuck Taylor All Star",
     "brand": "Converse",
     "type": "Sneakers",
-    "price": "₹5,499",
+    "price": 5499,
     "sizes": ["UK 5", "UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://www.converse.in/media/catalog/product/m/9/m9160_a_107x1.jpg"
   },
@@ -31,7 +31,7 @@
     "name": "Vans Old Skool",
     "brand": "Vans",
     "type": "Sneakers",
-    "price": "₹6,499",
+    "price": 6499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://cdn-images.farfetch-contents.com/16/67/39/53/16673953_32666843_1000.jpg"
   },
@@ -40,7 +40,7 @@
     "name": "New Balance 574",
     "brand": "New Balance",
     "type": "Sneakers",
-    "price": "₹6,049",
+    "price": 6049,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://rukminim3.flixcart.com/image/850/1000/xif0q/shoe/u/d/i/-original-imagtbtf7g3h52zf.jpeg"
   },
@@ -49,7 +49,7 @@
     "name": "Puma Suede Classic",
     "brand": "Puma",
     "type": "Sneakers",
-    "price": "₹5,999",
+    "price": 5999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20231111/dUbe/654f9bb3afa4cf41f5841fb4/-1117Wx1400H-469515338-red-MODEL5.jpg"
   },
@@ -58,7 +58,7 @@
     "name": "Reebok Club C 85",
     "brand": "Reebok",
     "type": "Sneakers",
-    "price": "₹5,859",
+    "price": 5859,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/27740328/2024/2/21/9e3443db-f041-45ba-81ba-f617c8ae20b41708503613588ReebokMensClubC852.jpg"
   },
@@ -67,7 +67,7 @@
     "name": "Jordan 1 Retro High",
     "brand": "Nike",
     "type": "Sneakers",
-    "price": "₹16,995",
+    "price": 16995,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://hustleculture.co.in/cdn/shop/files/3_47_d558ee17-a23f-4f2f-9b19-f8b1e7ecb5d1.jpg"
   },
@@ -76,7 +76,7 @@
     "name": "Nike Air Max 90",
     "brand": "Nike",
     "type": "Sneakers",
-    "price": "₹10,995",
+    "price": 10995,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240220/XTfN/65d4bf7d16fd2c6e6a0c8248/-473Wx593H-469581863-white-MODEL.jpg"
   },
@@ -85,7 +85,7 @@
     "name": "Adidas Superstar",
     "brand": "Adidas",
     "type": "Sneakers",
-    "price": "₹8,999",
+    "price": 8999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240109/W5AP/659d63ce74cb305fe00e6c55/-473Wx593H-469584094-blue-MODEL.jpg"
   },
@@ -94,7 +94,7 @@
     "name": "Brooks Ghost",
     "brand": "Brooks",
     "type": "Running Shoes",
-    "price": "₹11,999",
+    "price": 11999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20230624/Q42u/649622e6eebac147fce87ca8/-473Wx593H-465097181-black-MODEL.jpg"
   },
@@ -103,7 +103,7 @@
     "name": "Saucony Kinvara",
     "brand": "Saucony",
     "type": "Running Shoes",
-    "price": "₹10,499",
+    "price": 10499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240923/OU1j/66f161b7f9b8ef490b5bd65e/-1117Wx1400H-469658100-black-MODEL.jpg"
   },
@@ -112,7 +112,7 @@
     "name": "Hoka Clifton",
     "brand": "Hoka",
     "type": "Running Shoes",
-    "price": "₹12,499",
+    "price": 12499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20230621/1U8a/6492e07542f9e729d772e1a5/-473Wx593H-464307751-blue-MODEL.jpg"
   },
@@ -121,7 +121,7 @@
     "name": "Asics GEL-Kayano",
     "brand": "Asics",
     "type": "Running Shoes",
-    "price": "₹13,999",
+    "price": 13999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240809/GVYe/66b5c8c71d763220fa6c961b/-473Wx593H-700216295-black-MODEL.jpg"
   },
@@ -130,7 +130,7 @@
     "name": "Balenciaga Triple S",
     "brand": "Balenciaga",
     "type": "Luxury Sneakers",
-    "price": "₹79,999",
+    "price": 79999,
     "sizes": ["UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240821/Hgj2/66c6198a1d763220fa8cff89/-473Wx593H-700307546-white-MODEL3.jpg"
   },
@@ -139,7 +139,7 @@
     "name": "Gucci Ace Sneaker",
     "brand": "Gucci",
     "type": "Luxury Sneakers",
-    "price": "₹62,999",
+    "price": 62999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://runwaycatalog.in/wp-content/uploads/2021/01/38.jpg.webp"
   },
@@ -148,7 +148,7 @@
     "name": "Common Projects Achilles Low",
     "brand": "Common Projects",
     "type": "Casual Sneakers",
-    "price": "₹45,000",
+    "price": 45000,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20230321/EdDh/6418d01caeb26924e3d39f74/-473Wx593H-465669688-white-MODEL.jpg"
   },
@@ -157,7 +157,7 @@
     "name": "Christian Louboutin Pigalle",
     "brand": "Christian Louboutin",
     "type": "Formal Heels",
-    "price": "₹88,000",
+    "price": 88000,
     "sizes": ["EU 36", "EU 37", "EU 38", "EU 39"],
     "img": "https://myalmari.in/cdn/shop/files/SHOE5-0042.jpg?v=1696407395"
   },
@@ -166,7 +166,7 @@
     "name": "Manolo Blahnik Hangisi",
     "brand": "Manolo Blahnik",
     "type": "Luxury Heels",
-    "price": "₹92,000",
+    "price": 92000,
     "sizes": ["EU 36", "EU 37", "EU 38", "EU 39"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20220823/mTXa/6303d966f997dd394c103682/-473Wx593H-469172678-beige-MODEL2.jpg"
   },
@@ -175,7 +175,7 @@
     "name": "Jimmy Choo Romy",
     "brand": "Jimmy Choo",
     "type": "Luxury Heels",
-    "price": "₹78,000",
+    "price": 78000,
     "sizes": ["EU 36", "EU 37", "EU 38", "EU 39"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240305/OjqE/65e7052e16fd2c6e6a3cb602/-473Wx593H-410385740-10003-MODEL.jpg"
   },
@@ -184,7 +184,7 @@
     "name": "Dr. Martens 1460",
     "brand": "Dr. Martens",
     "type": "Boots",
-    "price": "₹16,499",
+    "price": 16499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240416/qov7/661e2af705ac7d77bb0c8349/-473Wx593H-465726418-black-MODEL.jpg"
   },
@@ -193,7 +193,7 @@
     "name": "Timberland 6-Inch Premium Boot",
     "brand": "Timberland",
     "type": "Outdoor Boots",
-    "price": "₹18,999",
+    "price": 18999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20240228/OnS3/65df1b9a16fd2c6e6a27685e/-1117Wx1400H-410369143-110324-MODEL2.jpg"
   },
@@ -202,7 +202,7 @@
     "name": "UGG Classic Short Boot",
     "brand": "UGG",
     "type": "Winter Boots",
-    "price": "₹13,499",
+    "price": 13499,
     "sizes": ["UK 5", "UK 6", "UK 7", "UK 8"],
     "img": "https://rukminim2.flixcart.com/image/850/1000/j9338nk0/shoe/p/d/w/cll-4029-3-cl-by-carlton-london-black-original-imaeyypywbhbzxf8.jpeg"
   },
@@ -211,7 +211,7 @@
     "name": "Birkenstock Arizona",
     "brand": "Birkenstock",
     "type": "Sandals",
-    "price": "₹6,999",
+    "price": 6999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20230621/ViFh/649231d842f9e729d75cfc39/-473Wx593H-463301906-blue-MODEL.jpg"
   },
@@ -220,7 +220,7 @@
     "name": "Teva Original Universal",
     "brand": "Teva",
     "type": "Sandals",
-    "price": "₹4,499",
+    "price": 4499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://img.ltwebstatic.com/images3_pi/2023/06/19/1687143660cbb9ab001a43ee0ce4af78c80c8ac4e9_thumbnail_720x.jpg"
   },
@@ -229,7 +229,7 @@
     "name": "Crocs Classic Clog",
     "brand": "Crocs",
     "type": "Clogs",
-    "price": "₹3,299",
+    "price": 3299,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20230615/gBBb/648b045542f9e729d744892b/-1117Wx1400H-469430329-beige-MODEL.jpg"
   },
@@ -238,7 +238,7 @@
     "name": "Hunter Original Tall Boots",
     "brand": "Hunter",
     "type": "Boots",
-    "price": "₹13,499",
+    "price": 13499,
     "sizes": ["UK 4", "UK 5", "UK 6", "UK 7", "UK 8"],
     "img": "https://images-static.nykaa.com/media/catalog/product/0/f/0faed0fSBO010146_5.jpg"
   },
@@ -247,7 +247,7 @@
     "name": "Sperry Top-Sider Authentic Original",
     "brand": "Sperry",
     "type": "Boat Shoes",
-    "price": "₹6,999",
+    "price": 6999,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/h67/h3a/9725629825054/-473Wx593H-460052713-cream-MODEL.jpg"
   },
@@ -256,7 +256,7 @@
     "name": "Cole Haan GrandPrø Tennis",
     "brand": "Cole Haan",
     "type": "Sneakers",
-    "price": "₹9,499",
+    "price": 9499,
     "sizes": ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20201201/lNSG/5fc54693aeb269d5632373f7/-473Wx593H-460797709-white-MODEL.jpg"
   },
@@ -265,7 +265,7 @@
     "name": "Veja Esplar",
     "brand": "Veja",
     "type": "Sneakers",
-    "price": "₹10,999",
+    "price": 10999,
     "sizes": ["UK 5", "UK 6", "UK 7", "UK 8", "UK 9"],
     "img": "https://assets.ajio.com/medias/sys_master/root/20220301/idAM/621d3070f997dd03e2f5b33a/-473Wx593H-469101351-white-MODEL.jpg"
   }
