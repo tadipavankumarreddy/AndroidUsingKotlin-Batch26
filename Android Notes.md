@@ -635,4 +635,107 @@ Going to use
 - HttpsURLConnection
 - Kotlinx.seralization
 - LazyVerticalGrid
-- 
+
+### MVVM (Model, View, ViewModel)
+1. Model Layer
+   - This Layer is responsible for **Data classes**, **Business Logic**, and the **data Sources (network/local)**
+     - `Shoe.kt`
+       - Represents the **data model**
+     - `ShoeRepository.kt`
+       - Responsible for **fetching data** from the network. This acts as a **repositiory**, which is a standard part of Model Layer in MVVM.
+     - `NetworkCheck.kt`
+       - Contains a helper function `isInternetAvailable()` for network capability checks- a valid utility for data/network access layer.
+2. View Layer
+   - This is the **Jetpack compose UI** - responsible only for rendering the UI based on data provided by the ViewModel. 
+     - `MainActivity.kt`
+       - Initializes the `ShoeViewModel` and passes it down.
+       - Checks for Internet and shows a dialog.
+       - Launches `ShoeApp` which is a composable based on the network availability. 
+     - `ShoeApp.kt`
+       - uses `NavController` for screen Navigation.
+       - Displays loading state or routes to `ShoeGrid` and `ShoeDetailsScreen`.
+     - `ShoeGrid.kt`/ `ShoeItem.kt`/`ShoeDetailsScreen.kt`
+       - Present the UI logic only.
+3. ViewModel Layer
+   -  This is a bridge between  Model and View, holding the UI-releated Data in a lifecycle aware manner
+      -  `ShoeViewModel.kt`
+         -  Holds the state of the shoe list (shoe_list) and loading flag (isLoading)
+         -  Indicates data fetching via `ShoeRepository`
+         -  Provides business logic `getShoeById()`.
+
+### SQL
+***SQL - Structure Query Language***
+- SQL is a relational Database where the data is organized in Rows and Coloumns (Table)
+- Operations
+  - Storing
+  - Retrieving
+  - Modifying
+
+[Click Here](https://sqliteonline.com/) to practice the commands below.
+
+###### Table Sample used 
+***Table name: students_data***
+student_id|student_name|student_age
+----------|-----------|-----------
+1|Pavan Kumar|28
+2|Md Naveed|22
+3|Chester|21
+4|Darshana|20
+  
+SQLite - Is a Database which is light weight database
+- It is embedded in Android by default.
+
+###### Main Classes that we have on android to make use of SLQLite are
+- SQLiteDatabase
+    - It is used to perform all SQLite operations (database Operations)
+- SQLiteOpenHelper
+    - It is used for database creation and version Management
+
+###### CRUD - Create, Read, Update, Delete
+###### Create a table
+```SQL
+CREATE table students_data(student_id INTEGER PRIMARY KEY AUTOINCREMENT, student_name TEXT, student_age INTEGER);
+```
+
+###### Insert Data into the Table
+```SQL
+INSERT INTO students_data(student_name, student_age) VALUES("Pavan Kumar", "30");
+```
+
+###### Read the table with Select Command
+- To read all the values of the table
+```SQL
+SELECT * FROM students_data;
+```
+- To read only the specific rows in the table
+```SQL
+SELECT student_id, student_name from students_data;
+```
+- To Read database values on a ```where``` condition
+```SQL
+select student_id,student_name from students_data where student_age>=26;
+```
+
+```SQL
+SELECT * from students_data ORDER BY student_name ASC;
+```
+
+###### Update Command
+```SQL
+UPDATE students_data set student_name = "TPK Reddy" where student_id = 1;
+```
+
+###### Delete Command
+```SQL
+DELETE from students_data where student_id = 1;
+```
+
+### Room Database
+The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite. In particular, Room provides the following benefits:
+
+- Compile-time verification of SQL queries.
+- Convenience annotations that minimize repetitive and error-prone boilerplate code.
+- Streamlined database migration paths.
+
+
+

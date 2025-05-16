@@ -11,7 +11,7 @@ data class Shoe(
     val name:String,
     val brand:String,
     val type: String,
-    val price:String,
+    val price:Int,
     val sizes: List<String>,
     val img: String
 )

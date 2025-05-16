@@ -60,7 +60,7 @@ fun ShoeDetailsScreen(shoe: Shoe){
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(text = shoe.name, style = MaterialTheme.typography.titleLarge)
-        Text(text = shoe.price, style = MaterialTheme.typography.titleLarge)
+        Text(text = "₹${shoe.price}", style = MaterialTheme.typography.titleLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
 

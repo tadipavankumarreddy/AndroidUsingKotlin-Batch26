@@ -51,7 +51,7 @@ fun ShoeItem(shoe: Shoe, onClick: () -> Unit){
         Spacer(modifier = Modifier.height(4.dp))
 
         ShoeText(shoe.name)
-        ShoeText(shoe.price)
+        ShoeText("₹${shoe.price}")
     }
 }
 
