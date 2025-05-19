@@ -737,5 +737,28 @@ The Room persistence library provides an abstraction layer over SQLite to allow 
 - Convenience annotations that minimize repetitive and error-prone boilerplate code.
 - Streamlined database migration paths.
 
+We have built a `Note Taking App`, refer the entire notes [here](/Note%20Taking%20App.md) 
+
+### When we can use ViewModel without needing additional dependencies, why did we add the dependency to our project ?
+
+You can use ViewModel without additional dependencies in "Non-Compose" apps because it is part of Android's Jetpack "androidx.lifecycle" library. 
+
+But When you use jetpack compose, you need `lifecycle-viewmodel-compose` to bridge the gap between ViewModel and Compose. 
+
+**Why do you need this dependency?**
+
+- Compose has no built in knowledge of ViewModel
+  - Jetpack compose is UI-First and Declarative, while viewmodel is part of the architecture componenents. To Make them work together - like using viewModel() inside a @composable - You need
+```kotlin
+implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+```
+
+This dependency gives you
+- viewModel() function for Composables.
+- Seamless lifecycle-aware integration
+- Ability to scope viewModel to Naviagtion graphs or composable interactions. 
+
+### Assignment
+Add an Icon (Heat icon - That initially displays an outlined heart icon - When clicked has to turn a filled heart icon) up on tapping it, we should add all the shoe details to Room Database. Later on, when the same shoe is opened, the screen should show a filled heart icon as it is present in the room Database. On top of this, use a button to navigate the user to wishlisted items screen where you display All the items that are added to the database.
 
 
