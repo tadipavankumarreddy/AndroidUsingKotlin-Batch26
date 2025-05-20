@@ -1,6 +1,9 @@
 package com.nareshtech.notetakingapp
 
+import android.os.Build
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -21,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.getValue
@@ -29,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.nareshtech.notetakingapp.room.Note
 
@@ -40,6 +45,21 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
 
     var title by remember { mutableStateOf("") }
     var content by remember { mutableStateOf("") }
+    val context = LocalContext.current
+
+    // Permission LAuncher to request Permissions from the user to post notifications.
+    val permissionLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
+        onResult = {isGranted ->
+            if(!isGranted){
+                Toast.makeText(context,"Notification Permission denied", Toast.LENGTH_LONG).show()
+            }
+        })
+
+    LaunchedEffect(Unit) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues())
         .padding(WindowInsets.navigationBars.asPaddingValues())) {
@@ -56,6 +76,8 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
         Button(onClick = {
             if(title.isNotBlank() && content.isNotBlank()){
                 viewModel.addNote(Note(title = title, content = content))
+                createNotificationChannel(context)
+                showNoteAddedNotification(context,title)
                 content = ""
                 title = ""
             }

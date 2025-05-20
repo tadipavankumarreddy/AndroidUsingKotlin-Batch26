@@ -761,4 +761,287 @@ This dependency gives you
 ### Assignment
 Add an Icon (Heat icon - That initially displays an outlined heart icon - When clicked has to turn a filled heart icon) up on tapping it, we should add all the shoe details to Room Database. Later on, when the same shoe is opened, the screen should show a filled heart icon as it is present in the room Database. On top of this, use a button to navigate the user to wishlisted items screen where you display All the items that are added to the database.
 
+---
 
+# 📘 Android Notifications with Jetpack Compose – Complete Notes
+
+---
+
+## 📌 1. **What are Notifications in Android?**
+
+**Notifications** in Android are messages that appear **outside the UI of your app**, alerting the user about **important information**, **updates**, or **actions** they might want to take. They typically appear in the **notification drawer** or as **heads-up popups** (on newer versions).
+
+### 🔍 Why Are They Important?
+
+* Keep users engaged with timely updates.
+* Notify about background work, reminders, messages, or downloads.
+* Improve user experience by offering actions without opening the app.
+
+---
+
+## 🧱 2. **Structure of a Notification**
+
+A basic notification contains:
+
+| Part             | Description                                  |
+| ---------------- | -------------------------------------------- |
+| Small Icon       | Required icon shown in status bar and drawer |
+| Title            | Main title of the notification               |
+| Content Text     | Short message or summary                     |
+| Timestamp        | When the notification was posted             |
+| Optional Actions | Buttons like Reply, Mark as Read, etc.       |
+| Style            | BigTextStyle, InboxStyle, MediaStyle, etc.   |
+
+---
+
+## 🎨 3. **Notification Styles**
+
+Android provides several styles to enhance how notifications appear:
+
+| Style             | Description                       |
+| ----------------- | --------------------------------- |
+| `BigTextStyle`    | For long messages                 |
+| `InboxStyle`      | For multiple lines of content     |
+| `BigPictureStyle` | For large images                  |
+| `MediaStyle`      | For media playback (music, video) |
+| `MessagingStyle`  | For chat apps                     |
+
+📌 *You can customize notifications even more using custom layouts, but most use built-in styles.*
+
+---
+
+## 🔔 4. **What is a Notification Channel? (Android 8.0+)**
+
+Starting from **Android 8.0 (API 26)**, you must **register a Notification Channel** before posting notifications.
+
+### Why?
+
+* To group similar types of notifications (e.g., Chats, Alerts).
+* Users can control **sound, vibration, importance** per channel.
+
+### Key Properties:
+
+* `channelId`: Unique ID for the channel
+* `name`: Visible to users
+* `importance`: Determines interruptiveness (High, Default, Low, Min)
+
+---
+
+## ✅ 5. **Setup in Android Studio**
+
+### Step 1: Add Permission (Android 13+)
+
+```xml
+<!-- AndroidManifest.xml -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+```
+
+### Step 2: Request Permission (Runtime - API 33+)
+
+```kotlin
+ActivityCompat.requestPermissions(
+    this,
+    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+    1
+)
+```
+
+---
+
+## ✅ 6. **Create a Notification Channel**
+
+```kotlin
+fun createNotificationChannel(context: Context) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val name = "General Notifications"
+        val descriptionText = "Includes all general notifications"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel("channel_id", name, importance).apply {
+            description = descriptionText
+        }
+
+        val notificationManager: NotificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+}
+```
+
+📌 Call this inside `MainActivity.onCreate()`.
+
+---
+
+## ✅ 7. **Build a Simple Notification**
+
+```kotlin
+fun showSimpleNotification(context: Context) {
+    val builder = NotificationCompat.Builder(context, "channel_id")
+        .setSmallIcon(R.drawable.ic_notification)
+        .setContentTitle("Welcome Student!")
+        .setContentText("Your first Jetpack Compose notification is here.")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    with(NotificationManagerCompat.from(context)) {
+        notify(1001, builder.build())
+    }
+}
+```
+
+---
+
+## ✅ 8. **Trigger Notification from Compose UI**
+
+```kotlin
+@Composable
+fun NotificationButton() {
+    val context = LocalContext.current
+
+    Button(onClick = { showSimpleNotification(context) }) {
+        Text("Show Notification")
+    }
+}
+```
+
+---
+
+## ✅ 9. **Add Action Button to Notification**
+
+```kotlin
+fun showNotificationWithAction(context: Context) {
+    val intent = Intent(context, MainActivity::class.java)
+    val pendingIntent = PendingIntent.getActivity(
+        context, 0, intent,
+        PendingIntent.FLAG_IMMUTABLE
+    )
+
+    val builder = NotificationCompat.Builder(context, "channel_id")
+        .setSmallIcon(R.drawable.ic_notification)
+        .setContentTitle("Tap to Open")
+        .setContentText("This notification has an action.")
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true)
+
+    NotificationManagerCompat.from(context).notify(1002, builder.build())
+}
+```
+
+---
+
+## ✅ 10. **Use BigTextStyle for Expanded Message**
+
+```kotlin
+fun showBigTextNotification(context: Context) {
+    val bigText = "This is a very long message that will be shown when the notification is expanded. You can use it to show more information to the user."
+
+    val builder = NotificationCompat.Builder(context, "channel_id")
+        .setSmallIcon(R.drawable.ic_notification)
+        .setContentTitle("BigTextStyle Example")
+        .setContentText("This is a short preview.")
+        .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+    NotificationManagerCompat.from(context).notify(1003, builder.build())
+}
+```
+
+---
+
+## 🛠️ 11. **Full Setup in MainActivity (Jetpack Compose)**
+
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Create Notification Channel once
+        createNotificationChannel(this)
+
+        setContent {
+            MaterialTheme {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    NotificationButton()
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
+## 📦 12. Optional: Multiple Channels Example
+
+```kotlin
+createChannel(context, "ch_chat", "Chat Messages")
+createChannel(context, "ch_alert", "Critical Alerts")
+
+fun createChannel(context: Context, id: String, name: String) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.createNotificationChannel(channel)
+    }
+}
+```
+
+---
+
+## 📚 Summary Table
+
+| Feature                  | API/Method                              |
+| ------------------------ | --------------------------------------- |
+| Create Channel           | `NotificationChannel`                   |
+| Post Notification        | `NotificationManagerCompat.notify()`    |
+| Use from Compose         | `LocalContext.current` + `Button()`     |
+| Add Action               | `PendingIntent` + `.setContentIntent()` |
+| Expand Text              | `BigTextStyle()`                        |
+| Permission (Android 13+) | `POST_NOTIFICATIONS` + Runtime request  |
+
+---
+
+## 🧪 Homework for Students
+
+1. Create a **notification** using `InboxStyle`.
+2. Add a **Reply Action** using `RemoteInput` (for chat apps).
+
+---
+
+### Pending Intent
+A Pending intent is a token that you give to another applicaiton (like system, AlarmManager, NotificationManager , etc.,) which allows the application to execute **your App's Code** at a later time, on **Your app's behalf**, even if your app is not running. 
+
+**Why is it needed?**
+Android apps run in a sandbox. so, one app cannot directly execute code from another app. Pending intent acts as a permission wrapper, allowing system services or other apps to perform operations using your app's identity and permissions. 
+
+**For Example**
+- Sending a notification that opens your app when clicked.
+- Scheduling an alarm using AlarmManager
+- Creating home screen widget that interacts with your app. 
+
+**How does Pending Intent Works ?**
+
+It wraps an Intent, and you specify the operation
+- Start Activity
+- Start Service
+- Start Broadcast
+
+Instead of executing the code now, It gives the system a handle to defer the execution. 
+
+**Types**
+- getActivity() - launches an Activity
+- getService() - launches a Service
+- getBroadcast() - sends a broadcast
+- getForegroundService() - Start a foreground service (API 26+)
+
+**Important Flags**
+- `FLAG_UPDATE_CURRENT` : Updates the existing pending intent with new extras
+- `FLAG_CANCEL_CURRENT`: Cancels the existing pending intent and creates a new one. 
+- `FLAG_NO_CREATE`: It returns null if no matching pending intent exists. 
+- `FLAG_ONE_SHOT`: can be used only once
+- `FLAG_IMMUTABLE` It prevents the intent from the existing pending intent from being modified.
+- `FLAG_MUTABLE`: allows the intent to be modified. 
+- 
