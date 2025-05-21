@@ -1044,4 +1044,9 @@ Instead of executing the code now, It gives the system a handle to defer the exe
 - `FLAG_ONE_SHOT`: can be used only once
 - `FLAG_IMMUTABLE` It prevents the intent from the existing pending intent from being modified.
 - `FLAG_MUTABLE`: allows the intent to be modified. 
-- 
+
+
+### Broadcast Receiver
+[slides](https://docs.google.com/presentation/d/1qF9Yeau7uHIP7_aOHWgPU_RnfxACZzGyAZIzcJWz0R0/edit?slide=id.g3cba478010_0_13#slide=id.g3cba478010_0_13)
+
+[Link to Official Documentation](https://developer.android.com/develop/background-work/background-tasks/broadcasts)

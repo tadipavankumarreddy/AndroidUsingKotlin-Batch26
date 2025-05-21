@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.compose.material3.Button
 import androidx.compose.ui.text.Paragraph
@@ -38,6 +39,9 @@ fun showNoteAddedNotification(context: Context, noteTitle:String){
 
     val pendingIntent = PendingIntent.getActivity(context,98,intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
+    // Convert the image into a bitmap
+    val bitmap = BitmapFactory.decodeResource(context.resources,R.drawable.noti_image)
+
     val builder = NotificationCompat.Builder(context,CHANNEL_ID)
         .setSmallIcon(R.drawable.outline_add_notes_24)
         .setContentTitle("New Note Added")
@@ -45,6 +49,8 @@ fun showNoteAddedNotification(context: Context, noteTitle:String){
         .setPriority(NotificationCompat.PRIORITY_MAX)
         .setAutoCancel(true)
         .setContentIntent(pendingIntent)
+        .addAction(R.drawable.outline_add_notes_24,"Mark as Read",pendingIntent)
+        .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
 
     with(NotificationManagerCompat.from(context)) {
         notify(42, builder.build())
