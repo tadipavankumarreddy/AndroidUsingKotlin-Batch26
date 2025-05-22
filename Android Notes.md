@@ -1050,3 +1050,45 @@ Instead of executing the code now, It gives the system a handle to defer the exe
 [slides](https://docs.google.com/presentation/d/1qF9Yeau7uHIP7_aOHWgPU_RnfxACZzGyAZIzcJWz0R0/edit?slide=id.g3cba478010_0_13#slide=id.g3cba478010_0_13)
 
 [Link to Official Documentation](https://developer.android.com/develop/background-work/background-tasks/broadcasts)
+
+
+### Firebase
+
+**What is Firebase ?**
+It is a Backend-as-a-service (BaaS) platform developed by Google that provides developers with tools to build and scale apps quickly - especially for Web and Mobile Platforms.
+
+**Firebase Core Features**
+1. [Firebase Authentication](https://firebase.google.com/docs/auth)
+   -   Helps you sign in users securely
+   -   Supports: Email/Password, [Google](https://firebase.google.com/docs/auth/android/google-signin), Facebook, Phone, etc.,
+2. Cloud Firestore
+   - A NoSQL cloud database to store and sync data in real time.
+   - Supports Offline access
+   - Scales Automatically
+   - Stores data in Collections & Documents (like Json Format)
+3. Realtime Database
+   -   Also a NoSQL database but older than Firestore
+   -   Syncs data in realtime across clients
+4. Firebase Cloud Storage
+   -   For uploading and sharing files (images, videos, documents)
+   -   Based on Google Cloud Storage
+   -   Secure file uploads/downloads via firebase Auth
+5. Firebase Cloud Functions
+   -   Run backend code (Node.js) without managing servers.
+   -   Useful for sending notifications, auto-processing, triggers etc.,
+   -   ex: send an email to the user on signup
+6. Firebase Hosting
+   -   Free & fast web hosting for static websites (HTML,CSS, JS)
+   -   Supports custom domains
+   -   Uses CDN for fast global access
+7. Firebase Cloud Messaging (FCM)
+   - Used to send push notifications to Android, Ios, and web users.
+   - Free and Scalable
+   - can target topics, specific devices or user groups. 
+8. Firebase Analytics
+   -   Tracks user behavior and app usage
+   -   Integrated with Google Analytics.
+   -   Helps improve user engagement and retention. 
+
+[Read about all firebase features](https://firebase.google.com/docs)
+

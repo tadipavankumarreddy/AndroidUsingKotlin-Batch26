@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     // TODO 0.2 add the plugin
     id("com.google.devtools.ksp")
+    // TODO : Step 2: add Google services Plugin
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -44,8 +46,17 @@ android {
 dependencies {
     // TODO 1: Add Dependencies and KSP (Kotlin Symbol Processing - for Annotations)
     implementation("androidx.room:room-runtime:2.7.1")
+    implementation(libs.play.services.auth)
     ksp("androidx.room:room-compiler:2.7.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+    // TODO: Step 3: add Firebase bom to keep all other firebase
+    //  services upto date with latest version
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    // TODO: Step 4: add Firebase auth dependency
+    implementation("com.google.firebase:firebase-auth")
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
