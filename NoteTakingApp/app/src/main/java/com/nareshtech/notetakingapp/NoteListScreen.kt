@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -20,6 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
@@ -35,7 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.nareshtech.notetakingapp.room.Note
+import kotlinx.coroutines.launch
 
 @Composable
 fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
@@ -46,7 +50,9 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
     var title by remember { mutableStateOf("") }
     var content by remember { mutableStateOf("") }
     val context = LocalContext.current
+    var isSignIn by remember { mutableStateOf(true) }
 
+    var googleAuthClient = GoogleAuthClient(context)
     // Permission LAuncher to request Permissions from the user to post notifications.
     val permissionLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
         onResult = {isGranted ->
@@ -55,6 +61,9 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
             }
         })
 
+    if(!isSignIn){
+        GoogleSignInScreen(context,viewModel)
+    }
     LaunchedEffect(Unit) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
@@ -63,6 +72,21 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
 
     Column(modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues())
         .padding(WindowInsets.navigationBars.asPaddingValues())) {
+
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+
+            OutlinedButton(onClick = {
+                viewModel.viewModelScope.launch {
+                    googleAuthClient.signOut()
+                    isSignIn = false
+                }
+            }) {
+                Text("Sign Out")
+            }
+        }
+
+
         OutlinedTextField(value = title, onValueChange = {title = it}, label = { Text("Title") },
             modifier = Modifier.fillMaxWidth())
 
