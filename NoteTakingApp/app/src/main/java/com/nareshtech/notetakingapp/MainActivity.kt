@@ -17,13 +17,13 @@ import com.nareshtech.notetakingapp.room.Note
 import com.nareshtech.notetakingapp.ui.theme.NoteTakingAppTheme
 
 class MainActivity : ComponentActivity() {
-    val viewModel: NoteViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             NoteTakingAppTheme {
-                GoogleSignInScreen(LocalContext.current,viewModel)
+                MainScreen(context = LocalContext.current)
             }
         }
     }

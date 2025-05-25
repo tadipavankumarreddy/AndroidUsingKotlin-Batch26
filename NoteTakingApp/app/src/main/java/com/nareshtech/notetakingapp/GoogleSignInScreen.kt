@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -22,43 +23,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
-fun GoogleSignInScreen(context: Context, viewModel: NoteViewModel = viewModel()){
-    val googleAuthClient = GoogleAuthClient(context)
+fun GoogleSignInScreen(context: Context, onSignInSuccess:()-> Unit){
+    val googleAuthClient = remember { GoogleAuthClient(context) }
 
-    var isSignIn by rememberSaveable {
-        mutableStateOf(googleAuthClient.isSignedIn())
-    }
 
     Box(modifier = Modifier.fillMaxSize().padding(WindowInsets.statusBars.asPaddingValues()).padding(
         WindowInsets.navigationBars.asPaddingValues()),
         contentAlignment = Alignment.Center){
-        if(isSignIn){
-            /*OutlinedButton(onClick = {
-                viewModel.viewModelScope.launch {
-                    googleAuthClient.signOut()
-                    isSignIn = false
+
+        OutlinedButton(onClick = {
+            CoroutineScope(Dispatchers.Main).launch {
+                val success = googleAuthClient.signIn()
+                if(success){
+                    onSignInSuccess()
                 }
-            }) {
-                Text(
-                    text = "Sign Out", fontSize = 16.sp,
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
-                )
-            }*/
-            NoteListScreen(viewModel)
-        }else{
-            OutlinedButton(onClick = {
-                viewModel.viewModelScope.launch {
-                    isSignIn = googleAuthClient.signIn()
-                }
-            }) {
-                Text(
-                    text = "Sign In with Google", fontSize = 16.sp,
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
-                )
             }
+        }) {
+            Text(
+                text = "Sign In with Google",
+                fontSize = 16.sp,
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
+            )
         }
     }
 }

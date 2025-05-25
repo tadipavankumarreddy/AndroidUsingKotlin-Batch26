@@ -42,7 +42,7 @@ import com.nareshtech.notetakingapp.room.Note
 import kotlinx.coroutines.launch
 
 @Composable
-fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
+fun NoteListScreen(viewModel: NoteViewModel = viewModel(), onSignOut:()-> Unit){
 
     // Collect StateFlow as Compose State
     val notes by viewModel.notes.collectAsState()
@@ -50,7 +50,6 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
     var title by remember { mutableStateOf("") }
     var content by remember { mutableStateOf("") }
     val context = LocalContext.current
-    var isSignIn by remember { mutableStateOf(true) }
 
     var googleAuthClient = GoogleAuthClient(context)
     // Permission LAuncher to request Permissions from the user to post notifications.
@@ -61,9 +60,6 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
             }
         })
 
-    if(!isSignIn){
-        GoogleSignInScreen(context,viewModel)
-    }
     LaunchedEffect(Unit) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
@@ -78,8 +74,7 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel()){
 
             OutlinedButton(onClick = {
                 viewModel.viewModelScope.launch {
-                    googleAuthClient.signOut()
-                    isSignIn = false
+                    onSignOut()
                 }
             }) {
                 Text("Sign Out")
