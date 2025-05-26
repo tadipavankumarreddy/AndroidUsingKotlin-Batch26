@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 // TODO 6: Create a Viewmodel
 class NoteViewModel(application: Application): AndroidViewModel(application) {
     private val repo : NoteRepository
+    private val firebaseRepo = FirestoreNoteRepository()
 
     val notes: StateFlow<List<Note>>
 
@@ -25,4 +26,8 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
 
     fun addNote(note: Note) = viewModelScope.launch { repo.addNote(note) }
     fun deleteNote(note:Note) = viewModelScope.launch { repo.deleteNote(note) }
+
+    fun syncNotesToFirestore(notes:List<Note>) = viewModelScope.launch {
+        firebaseRepo.syncNoteToFirestore(notes)
+    }
 }

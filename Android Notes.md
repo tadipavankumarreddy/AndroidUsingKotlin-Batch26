@@ -1092,3 +1092,85 @@ It is a Backend-as-a-service (BaaS) platform developed by Google that provides d
 
 [Read about all firebase features](https://firebase.google.com/docs)
 
+### FireStore Database
+Cloud firestore is a NoSQL cloud database provided by Firebase (part of Google Cloud Platform). It is designed to store and sync data for client and server side development
+- Fully Managed
+- Scales automatically
+- Real-time synchronization
+- Designed for mobile, web, and server apps
+
+#### Firestore vs realtime databases
+
+feature|Firestore|realtime databases
+---|---|---
+data model|document-collection|JSON Tree
+Queries|Indexed, complex queires supported|Shallow Queries Only
+Offline Support|Yes (android, web and ios)|yes
+Real-time updates|yes|yes
+Scalability|more scalable|less scalable
+Multi-region support|yes|No
+
+#### Core Concepts
+Collections & Documents
+- Firestore stores data in Documents, which are organized into Collections
+- A Document is a light weight record that contains key-value pairs
+- Each Collection can contain multiple documents
+- Documents can also contain sub collections.
+
+```javascript
+users (collection)
+|
+--userId (Document)
+    |- name: "pavan"
+    |- email:"pavan@gmail.com"
+    |
+    _ orders (subcollection)
+        |-item:"mobile"
+        |-price:12000
+```
+
+No SQL Nature
+- Firestore is schema less
+- Each document can contain any fields and subcollections
+
+#### data types
+- String
+- Numbers (Integers or Double)
+- Boolean
+- Map (nested Objects)
+- Array
+- Null
+- TimeStamp
+- GeoPoint
+- Reference (another document)
+
+#### Firebase Operations
+Basic CRUD
+- Create/set : set() - Creates or overwrites a document
+- Read: get() - fetch document or collection
+- Update: update() - Modify a specific document or a field
+- Delete: delete() - removes document or field.
+
+```javascript
+//set
+db.collection("users").doc("pavan").set({
+    name:"pavan",
+    age:33
+})
+
+// update
+db.collection("users").doc("pavan").update({
+    age:34
+})
+
+// Get
+const doc = await db.collection("users").doc("pavan").get();
+console.log(doc.data())
+
+// Delete
+db.collection("users").doc("pavan").delete()
+```
+
+[Read more about Firestore database](https://firebase.google.com/docs/firestore)
+
+
