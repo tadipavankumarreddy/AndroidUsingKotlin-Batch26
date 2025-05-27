@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -55,6 +56,8 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel(), onSignOut:()-> Unit){
     var content by remember { mutableStateOf("") }
     val context = LocalContext.current
 
+    val isSyncing by viewModel.isSyncing.collectAsState()
+
     var googleAuthClient = GoogleAuthClient(context)
     // Permission LAuncher to request Permissions from the user to post notifications.
     val permissionLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
@@ -75,7 +78,6 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel(), onSignOut:()-> Unit){
 
 
         Row(modifier = Modifier.fillMaxWidth()) {
-
             OutlinedButton(onClick = {
                 viewModel.viewModelScope.launch {
                     onSignOut()
@@ -85,6 +87,12 @@ fun NoteListScreen(viewModel: NoteViewModel = viewModel(), onSignOut:()-> Unit){
             }
         }
 
+        if(isSyncing){
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center) {
+                CircularProgressIndicator()
+            }
+        }
 
         OutlinedTextField(value = title, onValueChange = {title = it}, label = { Text("Title") },
             modifier = Modifier.fillMaxWidth())
