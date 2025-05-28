@@ -1173,4 +1173,97 @@ db.collection("users").doc("pavan").delete()
 
 [Read more about Firestore database](https://firebase.google.com/docs/firestore)
 
+### Retrofit
+Retrofit turns your HTTP API into a Java (or Kotlin) interface
 
+[Refer Official Documentation](https://square.github.io/retrofit/)
+
+Retrofit is the class through which your API interfaces are turned into callable objects. By default, Retrofit will give you sane defaults for your platform, but it allows for customization.
+
+**Converters**  
+By default, Retrofit can only deserialize HTTP bodies into OkHttp’s ResponseBody type, and it can only accept its RequestBody type for @Body.
+
+Converters can be added to support other types. Sibling modules adapt popular serialization libraries for your convenience.
+
+**Built-in converters**
+
+**Gson:** com.squareup.retrofit2:converter-gson  
+**Jackson:** com.squareup.retrofit2:converter-jackson
+**Moshi:** com.squareup.retrofit2:converter-moshi  
+**Protobuf:** com.squareup.retrofit2:converter-protobuf  
+**Wire:** com.squareup.retrofit2:converter-wire  
+**Simple XML:** com.squareup.retrofit2:converter-simplexml  
+**JAXB:** com.squareup.retrofit2:converter-jaxb  
+**Kotlin serialization:** com.squareup.retrofit2:converter-kotlinx-serialization  
+**Scalars (primitives, boxed, and String):** com.squareup.retrofit2:converter-scalars   
+
+**Dependencies**
+```kotlin 
+implementation("com.squareup.retrofit2:retrofit:3.0.0")
+implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+```
+
+**JSONPlaceHolder**  
+This is a fake RestFul Webservice that you can use to test if you are able to make netwrok requests.  
+[Link](https://jsonplaceholder.typicode.com/)
+
+**Postman**   
+Postman is a tool that you can use online or install it on the device to check if the REST APIs are working as per the requirement  
+[link](https://www.postman.com/)
+
+**What are POST & GET ?**   
+These are fundamental HTTP (Hypertext Transfer Protocol) methods used to communicate with web servers. They are essential for any app that needs to fetch data from an API or send data to server. 
+
+***GET Request***
+- Purpose: Primarily used to retrieve data from server. It's like asking a server for information without charging anything on the server. 
+- Data Transmission: Data is sent as URL Parameters (Query Strings)
+- Visibility : The data is visible in the URL, browser history, server logs and can be bookmarked or cached. 
+- Security: Less secure for sensitive data because the data is exposed in the URL. While Https encrypts the entire connection, the data itself is still part of the publicly visible URL.
+
+***When to use GET in Android ?***
+- Fetching user profile
+- Retrieving a list of products
+- Searching for information
+- Loading a webpage
+
+***POST Request***
+- Purpose: Primarily used to send data to the server to create or update a resource. It's like submitting information to the server that will likely cause a change. 
+- Data Transmission: Data is sent in the request body, which is seperate from the URL. 
+- Visibility: The data is not visible in the URL, providing a higher level of privacy and security compared to GET. 
+
+***When do we use POST***
+- submitting a form (e.g., user registration, login)
+- Uploading of files (images, documents)
+- Creating a new resource on the server
+- Sending sensitive information. 
+
+#### What is lazy{...} and lateinit ?
+
+`lazy` & `lateinit` are both kotlin features designed to defer the initialization of properties, but they cater to different scenarios and have distinct characteristics. Choosing between them depends on how and when you expect the property to be initialized. 
+
+
+`lateinit`
+- Means Late initialization. You are promising the kotlin compiler that you will initialize the property before you use it.
+- **Applicability** 
+  - Can only be used with `mutable` properties (`var`)
+  - can only be used with non-nullable types
+  - can only be used with non-primitive types (e.g, `String`,`MyClass`, `Context`, `Retrofit`) you cannot use it for `Int`, `Boolean`, `Double`, etc.,
+- **Initialization**
+  - must happen externally, usually in lifecycle method like `onCreate` or on a constructor, or a dependency injection framework.
+  - It is not `Thread-safe` by default. if multiple threads try to initalize it simultaneously, you will run into issues. 
+
+`lazy`
+- Means "lazy initialization". The property will be initialized only on it's first access. 
+- **Applicability** 
+  - can only be used with immutable properties (`val`)
+  - can only be used with non-nullable types
+  - can be used with `Any type`, including the primitives.
+- **Initialization**
+  - The initialization logic is defined with in the `lazy{...}` lambda block. 
+  - The initialization only happens `ONCE`(on the first access), and the computed value is then stored (memorized) for all subsequent accesses.
+  - It is `Thread safe` by default.
+
+In Essence:
+- use `lateinit` when you know the property will be initalized externally at some point before use, and it needs to be mutable. 
+- use `lazy` when the initialization logic can be defined right at the declaration, and you want to defer its creation until it's actually needed for a read-only property.
