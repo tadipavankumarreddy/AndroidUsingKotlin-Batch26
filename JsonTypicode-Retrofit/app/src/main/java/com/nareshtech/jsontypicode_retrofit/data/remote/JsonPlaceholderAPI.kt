@@ -1,6 +1,6 @@
 package com.nareshtech.jsontypicode_retrofit.data.remote
 
-import com.nareshtech.jsontypicode_retrofit.data.PostDto
+import com.nareshtech.jsontypicode_retrofit.data.model.PostDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

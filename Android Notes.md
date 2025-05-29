@@ -1267,3 +1267,17 @@ These are fundamental HTTP (Hypertext Transfer Protocol) methods used to communi
 In Essence:
 - use `lateinit` when you know the property will be initalized externally at some point before use, and it needs to be mutable. 
 - use `lazy` when the initialization logic can be defined right at the declaration, and you want to defer its creation until it's actually needed for a read-only property.
+
+***For JsonTypicode - Retrofit App***
+- data: Contains the data models, API Interfaces, and repository implementations
+  - model: Data classes for API requests/responses
+  - remote: Retrofit API interface
+  - Repository: implementation of data sources (e.g., calling API)
+- domain: Contains the business logic, use cases, and abstract interfaces
+  - model: Domain - specific data classes (if different from data layer)
+  - repository - abstract interface for data operations
+  - use case - Business logic for specific operations
+- presentation: Contains UI related code (Compose Composables, viewmodels)
+  - UI: Composable Functions
+  - ViewModel
+- Util

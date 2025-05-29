@@ -1,7 +1,7 @@
 package com.nareshtech.jsontypicode_retrofit.data.repository
 
 import com.google.gson.GsonBuilder
-import com.nareshtech.jsontypicode_retrofit.data.PostDto
+import com.nareshtech.jsontypicode_retrofit.data.model.PostDto
 import com.nareshtech.jsontypicode_retrofit.data.remote.JsonPlaceholderAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

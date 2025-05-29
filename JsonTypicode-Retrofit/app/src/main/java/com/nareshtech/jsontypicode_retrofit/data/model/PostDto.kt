@@ -1,4 +1,4 @@
-package com.nareshtech.jsontypicode_retrofit.data
+package com.nareshtech.jsontypicode_retrofit.data.model
 
 // DTO for Response of GET request , Posts and POST /posts
 data class PostDto(
