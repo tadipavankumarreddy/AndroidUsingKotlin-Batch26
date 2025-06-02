@@ -1281,3 +1281,149 @@ In Essence:
   - UI: Composable Functions
   - ViewModel
 - Util
+
+
+## Alarm Manager in Android
+Alarm manager is a system service in android that allows you to schedule operations to be executed at a specific time, even if the app is not running. It is commonly used for setting alarms, reminders, or background tasks that must occur at precise time intervals. 
+
+### 1. What is Alarm Manager?
+Alarm Manager lets you schedule tasks to run at a specific time or after a delay. It works even when your app is not in the foreground or when the device is idle, depending on the type of alarm used
+
+***Key Features***
+- Schedule operations to run at a precise time
+- Works in the background, even when the app is killed. 
+- supports both exact and inexact timings.
+
+### 2. Types of Alarms
+- RTC (Real time Clock) : Triggered based on the current system time. 
+  - RTC_WAKEUP:Wakes the device to trigger the alarm. 
+  - RTC: Triggers the alarm only if the device is already awake. 
+- ELAPSED_REALTIME : Triggered after a specified time relative to the device boot time. 
+  - ELAPSED_REALTIME_WAKEUP: Wakes the device to trigger the alarm
+  - ELAPSED_REALTIME: Triggers the alarm only if the device is already awake. 
+
+### 3. **Setup and Configuration**
+
+### Add Permissions in `AndroidManifest.xml`:
+```xml
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+```
+
+---
+
+### 4. **Basic Usage**
+### Example: Setting a One-Time Alarm
+
+1. **Create a BroadcastReceiver**
+This will define what happens when the alarm goes off:
+
+```kotlin
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
+
+class AlarmReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        Toast.makeText(context, "Alarm Triggered!", Toast.LENGTH_SHORT).show()
+    }
+}
+```
+
+2. **Schedule the Alarm**
+Use `AlarmManager` to schedule the alarm:
+
+```kotlin
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import java.util.Calendar
+
+fun scheduleAlarm(context: Context) {
+    val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+    val intent = Intent(context, AlarmReceiver::class.java)
+    val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+    val calendar = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 8) // Set the hour
+        set(Calendar.MINUTE, 30)    // Set the minute
+        set(Calendar.SECOND, 0)     // Set the second
+    }
+
+    alarmManager.setExact(
+        AlarmManager.RTC_WAKEUP,
+        calendar.timeInMillis,
+        pendingIntent
+    )
+}
+```
+
+3. **Cancel the Alarm**
+Cancel a previously set alarm:
+
+```kotlin
+fun cancelAlarm(context: Context) {
+    val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    val intent = Intent(context, AlarmReceiver::class.java)
+    val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+    alarmManager.cancel(pendingIntent)
+}
+```
+
+---
+
+## 5. **Repeating Alarm**
+Schedule an alarm to repeat at fixed intervals:
+
+```kotlin
+fun scheduleRepeatingAlarm(context: Context) {
+    val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+    val intent = Intent(context, AlarmReceiver::class.java)
+    val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+    alarmManager.setRepeating(
+        AlarmManager.RTC_WAKEUP,
+        System.currentTimeMillis(), // Start time
+        AlarmManager.INTERVAL_DAY,  // Repeat interval (e.g., daily)
+        pendingIntent
+    )
+}
+```
+
+---
+
+## 6. **Best Practices**
+- **Use `setExactAndAllowWhileIdle` for exact alarms:** Ensures alarms work during Doze mode (introduced in Android 6.0).
+- **Batch alarms if possible:** Reduce battery usage by combining multiple alarms into a single alarm.
+- **Handle device restarts:** Use `BOOT_COMPLETED` broadcast to reschedule alarms after a device reboot.
+
+```xml
+<receiver android:name=".AlarmReceiver" />
+<receiver android:name=".BootReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+</receiver>
+```
+
+---
+
+## 7. **Limitations and Alternatives**
+### Limitations:
+- Alarms are affected by Doze mode and battery optimizations.
+- `setRepeating` may not trigger exactly at the interval due to system optimizations.
+
+### Alternatives:
+- **WorkManager:** Use for deferrable and guaranteed background work.
+- **JobScheduler:** Use for background tasks that do not require exact timing.
+
+---
+
+## 8. **Useful Resources**
+- [AlarmManager Documentation](https://developer.android.com/reference/android/app/AlarmManager)
+- [PendingIntent Documentation](https://developer.android.com/reference/android/app/PendingIntent)
+- [Doze Mode and App Standby](https://developer.android.com/training/monitoring-device-state/doze-standby)
