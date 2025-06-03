@@ -1427,3 +1427,96 @@ fun scheduleRepeatingAlarm(context: Context) {
 - [AlarmManager Documentation](https://developer.android.com/reference/android/app/AlarmManager)
 - [PendingIntent Documentation](https://developer.android.com/reference/android/app/PendingIntent)
 - [Doze Mode and App Standby](https://developer.android.com/training/monitoring-device-state/doze-standby)
+
+
+### Job Scheduler
+[Slides](https://docs.google.com/presentation/d/1UILCEnzR1vurX0XaFV71Ke_yyIhEJ9--iRzwVpYKLwc/edit?resourcekey=0-RTKA4Q5ubz5BcdHZ6gRt-Q&slide=id.g18e75634d0_0_172#slide=id.g18e75634d0_0_172)
+
+**JobScheduler** is an intelligent task scheduling algorithm that works based on conditions.
+- Intelligent than Alarm Manager
+- Has 3 major components
+  - JobService
+    - This is where we define the task and also cancel a task (Job).
+      - onStartJob():Boolean
+        - True - When the job is offloaded to a worker thread (When the job runs in the background) - when the job is finished on the worker thread, you are supposed to explicitly call `jobFinished()`.
+        - False - When the task is completed. 
+        - By Deafult, this method runs on Main Thread. 
+      - onStopJob():Boolean
+  - JobInfo
+    - This is where the conditions / Constraints get set. 
+  - JobScheduler
+    - Will schedule or cancel jobs.    
+
+**Note**: All JobSchedulers must be registered as a servie in the manifest file 
+
+
+### Assignment
+- Create an Android app that uses `JobScheduler` to Sync data from a fake server (You can just log a statement or fetch dummy json from a url) every 15 minutes, but only when the device is charging and it is connected to unmetered network (Like Wifi).
+  - A Button to schedule a JOb
+  - JobInfo.Builder to configure job conditions/constraints
+  - JobService to handle the background task
+    - You have to offload the work to a worker thread. 
+  - Test it
+- Additionally, you can also show a notification to the users when the job is in running state, eventually, cancel this notification when the job is finished or stopped in between. 
+
+### Work Manager
+Work Manager is a more modern and flexible API for background Tasks introduced in Jetpack. It supports constraints and is compatible with all API levels >14.
+
+***Key Features***
+- Guaranteed Task Execution
+- Support for Constraints like network type, battery status etc.,
+- Suport for chaining of tasks
+
+***Steps to Work with Work Manager***
+1. Add Dependencies
+
+```kotlin
+implementation("androidx.work:work-runtime-ktx:2.10.1")
+```
+2. Define a Worker
+```kotlin
+// TODO 1: After adding the dependency - define a worker to create your own task
+class MyWorker(context: Context, workerParameters: WorkerParameters) : Worker(context,workerParameters){
+
+    override fun doWork(): Result {
+        Toast.makeText(applicationContext,"Work Running", Toast.LENGTH_LONG).show()
+        Log.v("Main", "Work Running")
+        return Result.success()
+    }
+
+}
+```
+3.  Schedule a work request
+```kotlin
+ val constraints = Constraints.Builder()
+            .setRequiresCharging(true)
+            .build()
+
+        // TODO 3: Create a work request
+        val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
+            .setConstraints(constraints)
+            .build()
+
+        val periodicWorkRequest = PeriodicWorkRequestBuilder<MyWorker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+
+WorkManager.getInstance(applicationContext).enqueue(workRequest)
+
+WorkManager.getInstance(applicationContext).enqueue(periodicWorkRequest)
+
+```
+
+
+4.  Key Differences between WorkManager & JobScheduler
+   
+Feature|JobScheduler|WorkManager
+---|---|---
+API level Support | 21+ | 14+
+Task Execution | Not guaranteed after app is killed | Guaranteed
+Chaining tasks | Not Supported | Supported
+Library Dependency | No | Requires Jetpack WorkManager
+
+[Official Doc](https://developer.android.com/reference/androidx/work/WorkManager)
+
+
