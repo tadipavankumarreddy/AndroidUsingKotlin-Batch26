@@ -1519,4 +1519,26 @@ Library Dependency | No | Requires Jetpack WorkManager
 
 [Official Doc](https://developer.android.com/reference/androidx/work/WorkManager)
 
+### Shared Preferences
+Shared preferences is a light weight storage mechanism in android that allows storing small key-value pairs persistently. It is mainly used for storing simple data like user preferences, settings, or session data. 
+
+**Key Features**
+- Stores data in XML format
+- Data persists even after the app is closed or restarted. 
+- Best suited for small amounts of primitive data (eg., Strings, Integers, Boolean)
+- Not Suitable for large or complex data structures like lists or images. 
+
+### Jetpack Data Store in Android
+Jetpack data store is Google's recommended replacement for Shared Preferences. It provides a more efficient, safer and asynchronous way to store key-value data using kotlin coroutines and flow. 
+
+**Why use Data store instead of shared preferences ?**
+- Asynchronous : Use coroutines and Flow, avoiding UI Thread blocking
+- Safer Storage: Uses `proto Datastore` for type safety.
+- No Performance Issues: Shared preferences blocks I/O operations, but data store doesn't
+
+**Types Of DataStore**
+- Preference DataStore: Key-value storages (very similar to shared preferences)
+- Proto Datastore: Stores structured objects with type safety using [protocol buffers](https://protobuf.dev/) (ProtoBuf)
+
+[Datastore](https://developer.android.com/topic/libraries/architecture/datastore)
 
