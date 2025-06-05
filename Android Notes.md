@@ -1542,3 +1542,27 @@ Jetpack data store is Google's recommended replacement for Shared Preferences. I
 
 [Datastore](https://developer.android.com/topic/libraries/architecture/datastore)
 
+### Content Provider
+A Contnet Provider is one of the four fundamental Android Application Components (the others being Activities, Services, Broadcast Receivers), whose primary purpose is to Manage access to a structured set of data. It acts as a standarad interface for applications to interact with data, wheather the data is stored in a database (room), files, over the network, or any other storage mechanisms. 
+
+**Core Components**
+- ContentProvider class
+  - This is the abstract class you will extend to
+  - You must implement the following methods
+    - onCreate() - Called when the provider is first created. Intilize your data source here (e.g., Get a reference to your room database DAO)
+    - query(uri, projection, selection, selectionArgs, sortOrder): Retrieves data. Returns the data in a `Cursor` (Which is like a pointer to a set of rows)
+    - insert(uri, values): Insert new rows. returns a URI of the new Row. 
+    - update(uri, values, selection, selectionArgs): Updates the existing rows. Returns the number of rows affected. 
+    - delete(uri, selection, selectionArgs): Deletes rows. Returns the number of rows affected.
+    - getType(uri): Returns the MIME type for the given URI. Useful for client apps to understand the data type
+- ContentResolver class
+  - This is what client application use
+  - You can access it via context.getContentResolver()
+- Uri (uniform resource Identifier)
+  - The most crucial part for identifying data
+  - Its String representing the data you want to access. 
+  - format: content://authority/path/id
+    - "content://": scheme, always for content providers
+    - authority: Uniquely identifies the content provider . This must be defined in the manifest file. 
+    - path : Specific type of data
+  - UriMatcher: This is a helper class used with your contnet provider to parse the incoming URIs and determine which data they refer to. Makes `switch` statements more manageable. 
