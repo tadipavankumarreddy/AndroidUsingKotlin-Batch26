@@ -1,5 +1,6 @@
 package com.nareshtech.notetakingapp.room
 
+import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,4 +20,8 @@ interface NoteDao {
 
     @Delete
     suspend fun deleteNote(note:Note)
+
+    @Query("select * from notes")
+    fun getNotesCursor(): Cursor
+
 }

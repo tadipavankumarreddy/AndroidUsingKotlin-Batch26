@@ -1566,3 +1566,11 @@ A Contnet Provider is one of the four fundamental Android Application Components
     - authority: Uniquely identifies the content provider . This must be defined in the manifest file. 
     - path : Specific type of data
   - UriMatcher: This is a helper class used with your contnet provider to parse the incoming URIs and determine which data they refer to. Makes `switch` statements more manageable. 
+
+
+### Assignments
+1. Create a simple content provider that exposes data from a room database
+2. Perform CRUD operations on the same `Content Resolver` app that we built.
+3. Try to access the contacts provider and list out all the contacts.
+
+

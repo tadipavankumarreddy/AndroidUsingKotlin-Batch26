@@ -32,10 +32,19 @@ fun MainScreen(context: Context, viewModel: NoteViewModel = viewModel()) {
             }
         )
     } else {
-        GoogleSignInScreen(
+        /*GoogleSignInScreen(
             context = context,
             onSignInSuccess = {
                 isSignedIn = true
+            }
+        )*/
+        NoteListScreen(
+            viewModel = viewModel,
+            onSignOut = {
+                viewModel.viewModelScope.launch {
+                    googleAuthClient.signOut()
+                    isSignedIn = false
+                }
             }
         )
     }
