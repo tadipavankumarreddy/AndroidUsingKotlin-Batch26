@@ -1574,3 +1574,58 @@ A Contnet Provider is one of the four fundamental Android Application Components
 3. Try to access the contacts provider and list out all the contacts.
 
 
+### Android Services
+
+**What is a service ?**
+- A Service is an application component that runs in the background to perform long running tasks. 
+  - It has no user interface
+  - It can continue running even when the user switches to another app
+  - Other components (like activities) can bind to a service to interact with it. 
+
+[Official Documentation](https://developer.android.com/develop/background-work/services)
+
+**Why use Service?**  
+Services are perfect for tasks that
+- Should not be interrupted by user interactions
+- Need to run in the background (like playing music, downloading a file, or checking the updates)
+- Allow other apps/ components to connect (IPC - Interprocess communication)
+
+**Types of Services**
+
+Type|Description
+---|---
+Foreground| Runs in the foreground and shows a notification (e.g., music playback, fitness tracking)
+Background| Runs in the background without user interaction (more restricted in newer android versions)
+Bound| Clients (Activities/Fragments) bind to the service to interact with it and exchange data. 
+
+**Service Lifecycle**
+![life-cycle-image](/service_lifecycle.png)
+
+
+Method | When it's called & What it does
+---|---
+onCreate()| Called once when the service is first created. Intialize resources here. 
+onStartCommand()|Called each time the service is started with `startService(...)` 
+onBind(intent)| called when another component binds to the service. Returns an IBinder for communication. 
+onDestroy()|called when the service is no longer used and is being destroyed. Cleaning up of resources happens here.
+
+**Key Notes on onStartCommand()**  
+- Return values of this method tell Android what to do if the service is killed
+  - `START_STICKY` - restart the service after it is killed (no intent data)
+  - `START_NOT_STICKY` - Don't restart if the service is killed.
+  - `START_REDELIVER_INTENT` - Restart and redeliver the last intent.
+- If you are using binding (bound services), you do not need to implement `onStartCommand(...)`
+
+**Important Note**
+- By default, a service runs on the main thread. 
+- move long tasks to a seperate thread (like HandlerThread or Coroutines or an ExecutorService) to avoid ANR (Application Not Responding) errors. 
+
+**Example Use cases**
+- Foreground Service - Music app playing songs with a visible notifications.
+- Background Service - Periodically uploading logs or files.
+- Bound Service - Weather app fetching current temperature on Demand. 
+
+### Assignment
+- Create an app that streams music from internet (just one working link is sufficient) using Foreground Services.
+- Try out the following code for bound services
+- 
