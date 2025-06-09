@@ -1628,4 +1628,140 @@ onDestroy()|called when the service is no longer used and is being destroyed. Cl
 ### Assignment
 - Create an app that streams music from internet (just one working link is sufficient) using Foreground Services.
 - Try out the following code for bound services
-- 
+
+
+Define a **bound service** that returns the **current time**  
+Create a **Compose UI** that binds to the service and fetches data
+
+---
+
+### 🟩 **1️⃣ Create the Bound Service**
+
+```kotlin
+class TimeService : Service() {
+
+    // Binder to allow clients to call public methods
+    private val binder = LocalBinder()
+
+    inner class LocalBinder : Binder() {
+        fun getService(): TimeService = this@TimeService
+    }
+
+    // Mandatory method to implement
+    override fun onBind(intent: Intent?): IBinder {
+        return binder
+    }
+
+    // Example method that returns current time
+    fun getCurrentTime(): String {
+        val currentTimeMillis = System.currentTimeMillis()
+        val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        return sdf.format(Date(currentTimeMillis))
+    }
+}
+```
+
+---
+
+### 🟩 **2️⃣ Compose UI + Binding to the Service**
+
+```kotlin
+@Composable
+fun BoundServiceExample(context: Context) {
+    var bound by remember { mutableStateOf(false) }
+    var currentTime by remember { mutableStateOf("N/A") }
+
+    // ServiceConnection object
+    val serviceConnection = remember {
+        object : ServiceConnection {
+            var service: TimeService? = null
+
+            override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+                val localBinder = binder as TimeService.LocalBinder
+                service = localBinder.getService()
+                bound = true
+            }
+
+            override fun onServiceDisconnected(name: ComponentName?) {
+                service = null
+                bound = false
+            }
+
+            fun getTime(): String {
+                return service?.getCurrentTime() ?: "Service not bound"
+            }
+        }
+    }
+
+    // UI
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = {
+            val intent = Intent(context, TimeService::class.java)
+            context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+        }) {
+            Text("Bind to Service")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(onClick = {
+            if (bound) {
+                currentTime = serviceConnection.getTime()
+            } else {
+                currentTime = "Service not bound"
+            }
+        }) {
+            Text("Get Current Time from Service")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(onClick = {
+            context.unbindService(serviceConnection)
+            bound = false
+        }) {
+            Text("Unbind Service")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Current Time: $currentTime")
+    }
+}
+```
+
+---
+
+### 🟩 **3️⃣ Putting It All Together in `MainActivity`**
+
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            BoundServiceExample(this)
+        }
+    }
+}
+```
+
+---
+
+### 🟩 **How it works:**
+
+✅ **`TimeService`** is a **bound service** that exposes a method to get the current time.
+✅ The **Compose UI**:
+
+* Binds to the service
+* Calls the service method via the **Binder**
+* Displays the **current time** fetched from the service.
+
+✅ Buttons:
+
+* **Bind**: Calls `bindService()` to connect.
+* **Get Current Time**: Calls the method in the service.
+* **Unbind**: Disconnects to release resources.
+---
