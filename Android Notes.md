@@ -1765,3 +1765,146 @@ class MainActivity : ComponentActivity() {
 * **Get Current Time**: Calls the method in the service.
 * **Unbind**: Disconnects to release resources.
 ---
+
+### Dependency Injection (DI)
+
+**What is Dependency Injection ?**  
+
+Dependency Injection is a design pattern in which **an object receives the other objects it depends on from an external source**, rather than creating them itself.
+
+**Dependency** -> The object a class needs to function.  
+**Injection** -> Providing the dependency to the class, instead of letting it create it.
+
+**Why use Dependency Injection ?**
+
+- **Decouples Classes** -> Easier to change or extend
+- **Improves Testability** -> can replace real dependencies with mocks
+- **Promotes code reusability** -> Components are easier to reuse in different contexts
+
+***Traditional Approach (No DI)***
+
+Let's take the example of a `Computer` class that needs `RAM`, `PROCESSOR`, and `HDD`:
+
+```kotlin
+class RAM {
+    // Implementation
+}
+
+class PROCESSOR{
+    // Implementation
+}
+
+class HDD {
+    // Implementation
+}
+
+class Computer{
+    private val ram = RAM()
+    private processor = PROCESSOR()
+    private val hdd = HDD()
+}
+```
+
+**Issue**  
+The computer class creates its dependencies itself. If you want to change, upgrade, or test these depenedencies, you have to modify the computer class which is not flexible. 
+
+***With Dependency Injection***
+
+Instead of creating the dependencies internally, we inject them via the constructor
+
+```kotlin
+class RAM {
+    // Implementation
+}
+
+class PROCESSOR{
+    // Implementation
+}
+
+class HDD {
+    // Implementation
+}
+
+class Computer(private val ram:RAM, 
+private val processor: PROCESSOR,
+private val hdd: HDD)
+{
+    // Implementation
+}
+```
+
+**What have we changed ?**
+
+- The computer class no longer creates its dependencies
+- It receives them from the outside -> Easier to manage and test. 
+
+
+### Types of DI
+1. Constructor Injection
+   - Dependencies are provided through the constructor
+```kotlin
+class Computer(private val ram:RAM, 
+private val processor: PROCESSOR,
+private val hdd: HDD)
+{
+    // Implementation
+}
+```
+1. Setter (Property) Injection
+   - Dependencies are provided through setters or public properties. 
+```kotlin
+class Computer{
+    lateinit var ram:RAM
+    lateinit var processor:PROCESSOR
+    lateinit var hdd:HDD
+
+    public fun setRAM(r:RAM){
+        ram = r
+    }
+
+    // other public methods as such
+}
+```
+3. Interface Injection 
+   - Less commonly used.
+
+
+### DI in Android
+In real android apps, managing dependencies manually can get complicated. That's why we use DI frameworks like
+- Dagger (Powerful but more boilerplate)
+- Hilt (built on Dagger, easier to use in Android)
+- Koin (Kotlin-specific, simpler for smaller projects)
+
+[**Hilt Documentation**](https://developer.android.com/training/dependency-injection/hilt-android)
+
+***Set up Hilt with KSP***
+- In your Project level build.gradle, under the plugins
+```kotlin
+id("com.google.devtools.ksp") version "1.9.0-1.0.11" apply false
+    id("com.google.dagger.hilt.android") version "2.56.2" apply fals
+```
+- Sync the project
+- In your app level build.gradle file, enable  the plugins
+```kotlin
+plugins {
+    //...
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+}
+```
+- In your app level build.gradle file, under the dependencies
+```kotlin
+dependencies {
+
+    implementation("com.google.dagger:hilt-android:2.56.2")
+    ksp("com.google.dagger:hilt-compiler:2.56.2")
+
+    //...
+}
+```
+- Sync the Project
+make sure to use proper ksp version based on your kotlin version
+
+[KSP Github release page](https://github.com/google/ksp/releases?page=3)
+
+
