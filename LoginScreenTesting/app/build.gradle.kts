@@ -8,6 +8,23 @@ android {
     namespace = "com.nareshtech.loginscreentesting"
     compileSdk = 35
 
+    flavorDimensions += "version"
+
+    productFlavors{
+        productFlavors {
+            create("demo") {
+                dimension = "version"
+                applicationIdSuffix = ".demo"
+                versionNameSuffix = "-demo"
+            }
+            create("paid") {
+                dimension = "version"
+                applicationIdSuffix = ".paid"
+                versionNameSuffix = "-paid"
+            }
+        }
+    }
+
     defaultConfig {
         applicationId = "com.nareshtech.loginscreentesting"
         minSdk = 24
@@ -40,6 +57,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.ui.test.junit4.android)
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+// Needed for createComposeRule(), but not for createAndroidComposeRule<YourActivity>():
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -50,8 +71,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

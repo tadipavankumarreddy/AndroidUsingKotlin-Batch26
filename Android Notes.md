@@ -1908,3 +1908,101 @@ make sure to use proper ksp version based on your kotlin version
 [KSP Github release page](https://github.com/google/ksp/releases?page=3)
 
 
+### Testing in Android
+When you implement your first feature in android app, you ran your application on a physical device and also sometimes on emulator to verify if the code works as expected. This means you already tested an application, albeit a manual test. 
+
+**Types of Tests**
+- Functional Tests : Does my app do what it's supposed to do ?
+- Performance Testing : Does it do it quickly and efficiently?
+- Accessibility testing : Does it work well with the accessibility services ?
+
+**Scope**
+- Tests vary depending on the size, or degree of isolation.
+  - Unit Testinig: These are called small tests. These tests will only verify a small portion of your application such as method or class. 
+  - End to End Testing: We may test the entire screen or userflow. 
+  - Integration Testing: If you have more modules and doing integration, these tests are really helpful. These are also called as `Medium` tests. 
+
+- [Mockito Framework](https://site.mockito.org/)
+- [Roboelectric by Google](https://developer.android.com/training/testing/local-tests/robolectric)
+- [Official Documentation](https://developer.android.com/training/testing/fundamentals)
+
+
+### UI Testing in Android
+
+***What is UI Testing?***
+UI (User Interface) testing checks wheather the UI components of Android app function correctly and display the expected output. It Simulates user interactions like clicks, swipes and typing. 
+
+***Goals of UI Testing***
+- Ensure UI behaves as expected
+- Detect regressions and bugs early
+- Automate repetitive manual tests
+- Improve user experience and reliability
+
+***Types of Android Tests***
+Type|Layer|Tool
+---|---|---
+Unit Test | Business logics| Junit, Mockito
+Instrumentation| Full app with UI|Espresso, UI Automator
+
+***Tools for UI Testing***
+1. Espresso (We cannot record UI tests for JEtpack Compose apps)
+2. UI Automator
+3. [Compose UI Testing](https://developer.android.com/develop/ui/compose/testing).
+
+### Build Flavors
+
+You can make the same app available in multiple flavors such as (Free & Paid). You do not need to create two different projects and everything can be done under one single project using build flavors
+
+Build flavors allows you to create different versions of your app (like free or paid) from a single codebase
+Each flavor can have  
+- Different applicaiton IDs
+- Different Resources (icons, strings and layouts)
+- Different code or feature sets
+- Different APIs or Configurations
+
+
+### Types of Location Access in Android
+In Android, you can control location access in different ways, allowing users to choose how and when the app can access their location. 
+
+1. Allow Only while using the app
+   1. Also known as "While-in-use" or "Foreground-only" access
+   2. Added in Android 10
+   3. Allows location access only when the app is actively used. 
+2. Allow One-time
+   1. Grants location access for single session. when the user closed the app, access is revoked. 
+3. Allow All the time
+   1. Provides the background access to the users location at any time.
+   2. Note: Your app must comply with the [Google Location Policies](https://support.google.com/googleplay/android-developer/answer/9799150?hl=en) for background location access.
+4. Deny
+   1. The users can deny location access, preventing the app from accessing the location data. 
+
+### Location Providers in Android
+Primarily android uses two location providers
+1. NETWORK_PROVIDER
+   1. Retrieves location based on cell-towers, Wi-Fi and other network signals. 
+   2. Require `ACCESS_COARSE_LOCATION` permission
+2. GPS_PROVIDER
+   1. Provides the location data based on satellite signals for high accuracy. 
+   2. require `ACCESS_FINE_LOCATION` Permission. 
+
+Your application can access supported location services using classes in `com.google.android.gms.location` package. 
+
+
+### Key classes for location in Android
+1. FusedLocationProviderClient
+   1. The central component of the Location Framework
+   2. Use this class to request location update and retrieve last known location.
+2. LocationRequest
+   1. A data object containing parameters like update intervals, priority and accuracy
+   2. Pass this object to `FusedLocationProviderClient` to specify the conditions for location updates. 
+3. LocationCallback
+   1. Used to retrieve notifications when the device's location changes or becomes unavailable. 
+   2. pass this as callback to `LocationResult` to capture and handle location data. 
+
+### Assignment
+- Expolore Geo Fencing API and Google Places API on Google Cloud Console
+- Please refer my free ebook [here](https://android-app-development-documentation.readthedocs.io/en/latest/)
+
+
+
+
