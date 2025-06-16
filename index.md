@@ -1,4 +1,5 @@
 - [Demo sessions Notes](/Android%20App%20Development%20Using%20Kotlin%20-%20Batch%2026%20-%20Naresh%20Technologies.pdf)
+- [Kotlin Programming Notes](/KotlinProgramminglanguage.md)
 - [Notes for the course](/Android%20Notes.md)
 - [Assignments to Work up on](/Assignments.md)
 - [Interview Preparation](/Interview%20Preparation/)
