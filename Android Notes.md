@@ -1,46 +1,45 @@
-#### Communication
+## Communication
 - fill out this form to keep in touch [link](https://forms.gle/9p8hom1m2eQ4PK669)
 
-- Feel free to explore android app development using Java by referring to this exclusive e-book written by me [Link](https://android-app-development-documentation.readthedocs.io/en/latest/)
+- Feel free to explore Android app development using Java by referring to this exclusive e-book written by me [Link](https://Android-app-development-documentation.readthedocs.io/en/latest/)
 
 
-### Jetpack UI Compose
+## Jetpack UI Compose
 
-Jetpack compose is android's modern toolkit for building native UI. It simplifies and accelerates UI development on android by using declarative approach - you describe what the UI should look like, and compose takes care of the rest. Instead of Modifying the UI elements imperatively (like with XML + `findViewById()`), you simply declare the UI using kotlin code. 
+Jetpack Compose is Android's modern toolkit for building native UI. It simplifies and accelerates UI development on Android by using declarative approach - you describe what the UI should look like, and Compose takes care of the rest. Instead of Modifying the UI elements imperatively (like with XML + `findViewById()`), you simply declare the UI using kotlin code.
 
 1. Jetpack Compose Basics
 - @Composable : An Annotation used on a function that defines UI in a declarative way.
-- Recomposition: When state changes, Composables automatically update the UI. 
+- Recomposition: When state changes, Composables automatically update the UI.
 - Modifier: Used to decorate or add behavior (e.g., padding, size, click listeners)
 
 2. Layouts:
-- Column, Row, Box : Used to arrange the UI components. 
-- Arragement & Alignment control positioning. 
+- Column, Row, Box : Used to arrange the UI components.
+- Arragement & Alignment control positioning.
 
-#### Assignment
-Just Go through compose basics and design the app by understanding the Column, Row, Box, Text, Button.
+***Please complete Assignment 1***
 
 ***mutableStateOf()***  is a function used to create a state holder that tracks changes to a variable. When the variable changes, it automatically triggers UI updates in Jetpack Compose.
 
 **Specifically:**
 - It is often created using mutableStateOf()
-- When you change a mutable state, any composables that read the state will automatically recompose (refresh)
+- When you change a mutable state, any composables that read the state will automatically reCompose (refresh)
 
 **remember{}** -> keep the state alive across recompositions.
 
-#### ViewModel
-ViewModel in android is a calss that is used to store and manage UI releted Data in a life cycle aware way.
+## ViewModel
+ViewModel in Android is a class that is used to store and manage UI related Data in a life cycle aware way.
 
 ***Why is it important ?***
-- In android, things like Activity and Fragment can be destroyed and recreated (for Example, when you rotate the phone. )
-- Normally, if you store data inside an activity (say, a list of names), it gets lost when the activity is recreated. 
-- ViewModel helps by holding the data seperately  so that even if your activity/fragment is recreated, the data survives. 
-- View Model is part of Android Jetpack libraries. 
-- Combine ViewModel + mutableStateOf() to make jetpack compose apps powerful.
+- In Android, things like Activity and Fragment can be destroyed and recreated (for Example, when you rotate the phone. )
+- Normally, if you store data inside an activity (say, a list of names), it gets lost when the activity is recreated.
+- ViewModel helps by holding the data separately  so that even if your activity/fragment is recreated, the data survives.
+- ViewModel is part of Android Jetpack libraries.
+- Combine ViewModel + mutableStateOf() to make Jetpack Compose apps powerful.
 
 ### Register me App Notes + UI Composables Explained
 
-**What we Designed**  
+**What we Designed**
 ![What we Designed](/registermephase1.png)
 
 **1. Project Setup**
@@ -50,10 +49,10 @@ ViewModel in android is a calss that is used to store and manage UI releted Data
 
 - setContent {} block sets the screen's UI using Compose.
 
-🔗 Reference: [ComponentActivity - Android Docs](https://developer.android.com/reference/androidx/activity/ComponentActivity)  
-🔗 Reference: [Edge-to-Edge Design - Android Docs](https://developer.android.com/develop/ui/views/layout/edge-to-edge)  
+🔗 Reference: [ComponentActivity - Android Docs](https://developer.Android.com/reference/Androidx/activity/ComponentActivity)
+🔗 Reference: [Edge-to-Edge Design - Android Docs](https://developer.Android.com/develop/ui/views/layout/edge-to-edge)
 
-**2. Registration Screen UI**  
+**2. Registration Screen UI**
 We define a Composable function `RegistrationScreen()` that builds the UI.
 
 **a. State Management**
@@ -66,17 +65,17 @@ var gender by remember { mutableStateOf("") }
 
 - These states will auto-trigger recomposition when changed.
 
-🔗 Reference: [State in Compose - Official Docs](https://developer.android.com/jetpack/compose/state)
+🔗 Reference: [State in Compose - Official Docs](https://developer.Android.com/Jetpack/Compose/state)
 
 **b. Column Layout**
 ```kotlin
 Column(
     modifier = Modifier
-        .padding(16.dp)
-        .fillMaxSize()
-        .background(Color.White)
-        .padding(WindowInsets.statusBars.asPaddingValues())
-        .padding(WindowInsets.navigationBars.asPaddingValues())
+       .padding(16.dp)
+       .fillMaxSize()
+       .background(Color.White)
+       .padding(WindowInsets.statusBars.asPaddingValues())
+       .padding(WindowInsets.navigationBars.asPaddingValues())
 )
 ```
 - We use a Column to arrange components vertically.
@@ -91,8 +90,8 @@ Column(
 
   - WindowInsets: Adjust padding dynamically for status/navigation bars to avoid UI overlaps.
 
-🔗 Reference: [Column Layout - Android Docs](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/Column)  
-🔗 Reference: [Handling Insets - Compose](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/WindowInsets)
+🔗 Reference: [Column Layout - Android Docs](https://developer.Android.com/reference/kotlin/Androidx/Compose/foundation/layout/Column)
+🔗 Reference: [Handling Insets - Compose](https://developer.Android.com/reference/kotlin/Androidx/Compose/foundation/layout/WindowInsets)
 
 **c. Heading (Title Text)**
 ```kotlin
@@ -103,9 +102,9 @@ Text(
     textAlign = TextAlign.Center,
     fontSize = 30.sp,
     modifier = Modifier
-        .fillMaxWidth()
-        .rotate(-10f)
-        .padding(10.dp)
+       .fillMaxWidth()
+       .rotate(-10f)
+       .padding(10.dp)
 )
 ```
 
@@ -119,7 +118,7 @@ Text(
 
   - **Rotation:** Tilted (-10 degrees) for fun visual appeal.
 
-🔗 Reference: [Text Composable - Compose Docs](https://developer.android.com/jetpack/compose/text/text)
+🔗 Reference: [Text Composable - Compose Docs](https://developer.Android.com/Jetpack/Compose/text/text)
 
 **d. Name Input Field**
 ```kotlin
@@ -135,7 +134,7 @@ TextField(
 
 - Expands to full width
 
-🔗 Reference: [TextField - Compose Docs](https://developer.android.com/reference/kotlin/androidx/compose/material/TextField)
+🔗 Reference: [TextField - Compose Docs](https://developer.Android.com/reference/kotlin/Androidx/Compose/material/TextField)
 
 **e. Age Input Field (Outlined)**
 ```kotlin
@@ -151,7 +150,7 @@ OutlinedTextField(
 
 - Forces **numeric keyboard** using **KeyboardType.Number** for entering Age.
 
-🔗 Reference: [OutlinedTextField - Compose Docs](https://developer.android.com/reference/kotlin/androidx/compose/material/OutlinedTextField)
+🔗 Reference: [OutlinedTextField - Compose Docs](https://developer.Android.com/reference/kotlin/Androidx/Compose/material/OutlinedTextField)
 
 **f. Gender Selection (Radio Buttons)**
 ```kotlin
@@ -178,8 +177,8 @@ Row(
   - Female
 
 - On click, gender value gets updated accordingly.
-- 
-🔗 Reference: [RadioButton - Compose Docs](https://developer.android.com/reference/kotlin/androidx/compose/material/RadioButton)
+-
+🔗 Reference: [RadioButton - Compose Docs](https://developer.Android.com/reference/kotlin/Androidx/Compose/material/RadioButton)
 
 **3. Previewing in Android Studio**
 ```kotlin
@@ -189,34 +188,34 @@ private fun RegistrationScreen()
 ```
 - `@Preview` annotation is used to see the layout without running the app.
 
-🔗 Reference: [@Preview - Compose Docs](https://developer.android.com/reference/kotlin/androidx/compose/ui/tooling/preview/Preview)
+🔗 Reference: [@Preview - Compose Docs](https://developer.Android.com/reference/kotlin/Androidx/Compose/ui/tooling/preview/Preview)
 
-### Intents in Android
-Intents are messaging objects that are sent to the android OS, the OS then takes a call to address these requests. 
+## Intents in Android
+Intents are messaging objects that are sent to the Android OS, the OS then takes a call to address these requests.
 
-**Intents**  
+**Intents**
 - Explicit Intents
-  - An Explicit intnet directly specifies the target component (Activity, Service, etc.,) it wants to start. You can use this when you know exactly where you want to go in your own app.
+  - An Explicit intent directly specifies the target component (Activity, Service, etc.,) it wants to start. You can use this when you know exactly where you want to go in your own app.
   - Eg: Navigating from one activity to another activity
 
 - Implicit Intents
-  - An Implicit intent does not name a specific component. Instead, it declares a general action to perform, and the android system find the best app to handle the action.
+  - An Implicit intent does not name a specific component. Instead, it declares a general action to perform, and the Android system find the best app to handle the action.
   - Eg: Opening a webpage in a browser
 
 ### What is a context in Android ?
-Context is a handle to the system. It gives your app access to everything android provides - like resources, launching activities, accessing databases, systems and services,etc.,
+Context is a handle to the system. It gives your app access to everything Android provides - like resources, launching activities, accessing databases, systems and services,etc.,
 
-**Types Of Context**  
-1. Activity Context (This is inside an Activity)
+**Types Of Context**
+1. Activity Context (This is used inside an Activity)
    - Tied to the Activity's lifecycle
    - Use when dealing with UI or starting other activities.
 2. ApplicationContext (getApplicationContext())
    -  Tied to the app's lifecycle.
    -  Use when you don't need the UI or Activity (e.g., from a background service)
 
-**Activity Result Launcher**  
+**Activity Result Launcher**
 ***What is it ?***
-ActivityResultLauncher is a modren way to Start an **Activity and get a result back** from it, replacing the older ***startActivityForResult()*** and ***onActivityResult()*** methods. 
+ActivityResultLauncher is a modern way to Start an **Activity and get a result back** from it, replacing the older ***startActivityForResult()*** and ***onActivityResult()*** methods.
 
 ***Why use it ?***
 - Simpler and lifecycle-aware
@@ -226,7 +225,7 @@ ActivityResultLauncher is a modren way to Start an **Activity and get a result b
 
 ***Code Steps to Follow***
 
-**Step 1:**  
+**Step 1:**
 ```kotlin
 val launcher  = registerForActivityResult{(ActivityResultContracts.StartActivityForResult())
 {result:ActivityResult->
@@ -252,10 +251,9 @@ finish()
 
 ### Common Intents (Implicit Intents present in most of the devices)
 
-[Follow this link to use more of them](https://developer.android.com/guide/components/intents-common)
+[Follow this link to use more of them](https://developer.Android.com/guide/components/intents-common)
 
-***Assignment:***
-Please try another two or three common intents. Drop me an email once you are done. pavankreddy.t@gmail.com
+***Complete Assignment 2***
 
 ---
 
@@ -422,7 +420,7 @@ Scaffold(
 
 ### Libraries and Tools
 
-* `androidx.navigation:navigation-compose`
+* `Androidx.navigation:navigation-Compose`
 * Optional: `com.google.accompanist:accompanist-navigation-animation`
 
 ---
@@ -445,45 +443,7 @@ Scaffold(
 2. VariantScreen -> Select Variant (8GB|128GB, 8GB|256GB)
 3. Summary Screen -> Display Brand + Variant Selected.
 
-## 📘 **Assignment: Laptop Customization App using ViewModel + Jetpack Compose Navigation**
-
-### 🎯 Objective:
-
-Build a simple 3-screen app that lets users customize and order a laptop. Use `ViewModel` to store user choices across screens without passing parameters explicitly.
-
----
-
-### 🧩 Screens & Flow:
-
-1. **HomeScreen** – Choose a laptop brand using radio buttons
-
-   * Dell
-   * HP
-   * Lenovo
-   * Apple
-   * Asus
-     ➡️ On clicking "Next", move to the ConfigScreen
-
-2. **ConfigScreen** – Select configuration (RAM + SSD)
-
-   * 8GB RAM | 256GB SSD
-   * 16GB RAM | 512GB SSD
-   * 32GB RAM | 1TB SSD
-     ➡️ On clicking "Next", move to SummaryScreen
-
-3. **SummaryScreen** – Show the selected brand and config
-   ➡️ Display message: `"You have selected {brand} with {config}."`
-
----
-
-### ✅ Requirements:
-
-* Use **Jetpack Compose Navigation**.
-* Use a **shared ViewModel** to store selections (brand & config).
-* Do **not** pass arguments between screens via navigation.
-* Use `viewModel()` inside each screen to access the same instance.
-* Use clean, readable UI (spacing, alignment, etc.).
-
+***Please complete Assignment 3***
 ---
 
 ### 🏁 Bonus Challenge (Optional):
@@ -513,20 +473,20 @@ class Result {
     var d:String? = null
     var error:String? = null
     var isLoading:Boolean = false
-    
+ 
     companion object {
         fun success(v:String):Result{
             val result = Result()
             result.d = v
             return result
         }
-        
+     
         fun failure(error:String):Result{
             val result = Result()
             result.error = error
             return result
         }
-        
+     
         fun loading():Result{
             val result = Result()
             result.isLoading = true
@@ -550,18 +510,18 @@ fun main(){
     val successResult = Result.success("Data Fetched!")
     val errorResult = Result.failure("Network Error")
     val loadingResult = Result.loading()
-    
+ 
     processResult(successResult)
     processResult(errorResult)
     processResult(loadingResult)
-		   
+		
 }
 ```
 
 This approach works, but it has its own drawbacks:
 - It's easy to have invalid states
 
-Sealed Classes are those classes that restrict the possible subclasses of a class within the same file. This gives you more control and makes your code safer. 
+Sealed Classes are those classes that restrict the possible subclasses of a class within the same file. This gives you more control and makes your code safer.
 
 ```kotlin
 sealed class Result {
@@ -583,11 +543,11 @@ fun main(){
     val successResult = Result.Success("Data Fetched!")
     val errorResult = Result.Failure("Network Error")
     val loadingResult = Result.Loading()
-    
+ 
     processResult(successResult)
     processResult(errorResult)
     processResult(loadingResult)
-		   
+		
 }
 ```
 
@@ -595,32 +555,32 @@ fun main(){
 - We declare `Result` as `sealed class`.
 - The different possible states (`Success`,`Failure`,`Loading`) are defined as subclasses within the `Result` Sealed class.
 - `Success` and `Failure` are `data class`es, which automatically provide useful methods like `equals()`, `hashCode()`, and `toString()`.
-- `Loading` is an `object` because it doesn't need any additional data - There's only one "Loading" state. 
+- `Loading` is an `object` because it doesn't need any additional data - There's only one "Loading" state.
 - In the processResult function, the when expression is now exhaustive. The kotlin compiler knows all the possible subtypes of a `Result` because they are all defined within the same file. This means you don't need an else branch, and the compiler will even warn you if you forget to handle any of the subtypes!
 
 Why Sealed Classes ?
-- Type Safety is Enhanced: Sealed classes restrict the possible types, making it impossible to represent invalid or illogical states. 
-- Exhaustive When expressions: This is a huge advantage. When you use a when expression with sealed class, the compiler ensures you handle all the possible subtypes. This makes your code more robust and less prone to runtime errors because you won't forget to handle specific case. 
+- Type Safety is Enhanced: Sealed classes restrict the possible types, making it impossible to represent invalid or illogical states.
+- Exhaustive When expressions: This is a huge advantage. When you use a when expression with sealed class, the compiler ensures you handle all the possible subtypes. This makes your code more robust and less prone to runtime errors because you won't forget to handle specific case.
 - Improved Code readability and Maintainability
 - Better control over inheritance.
 
 ### Jetpack Compose : Displying large data sets.
 
-- Jetpack compose provides `LazyColumn`, `LazyRow` and `LazyVerticalGrid` for efficiently displaying large or infinite lists. 
+- Jetpack Compose provides `LazyColumn`, `LazyRow` and `LazyVerticalGrid` for efficiently displaying large or infinite lists.
 - These components render only the items visible on the screen, improves performance & memory usage - Similar to RecyclerView.
 
-[Official Docs](https://developer.android.com/develop/ui/compose/lists)
+[Official Docs](https://developer.Android.com/develop/ui/Compose/lists)
 
 **Steps**
 
 1. Prepare Data
 2. Create a Design for each item  that you want to display
-3. Use LazyColumn, LazyRow and LazyVerticalGrid to show the items. 
+3. Use LazyColumn, LazyRow and LazyVerticalGrid to show the items.
 
 [RecyclerView](https://docs.google.com/presentation/d/1nFJqH0OSSZmjaycRzEGE6vvsm6jlxghQyoO15KKbkwc/edit?slide=id.gf0dd569a47_0_129#slide=id.gf0dd569a47_0_129)
 
 ### Android Prototyping
-To understand the visual representation of our app's functionality, it is a great idea to create prototypes. 
+To understand the visual representation of our app's functionality, it is a great idea to create prototypes.
 
 1. Figma
 2. Adobe XD
@@ -628,10 +588,10 @@ To understand the visual representation of our app's functionality, it is a grea
 4. Balsamiq or Wireframe
 5. proto.io/Marvel/inVision
 
-For Shoes app, the data is ready as a [json file](https://raw.githubusercontent.com/tadipavankumarreddy/AndroidUsingKotlin-Batch26/refs/heads/master/shoesdata.json) 
+For Shoes app, the data is ready as a [json file](https://raw.githubusercontent.com/tadipavankumarreddy/AndroidUsingKotlin-Batch26/refs/heads/master/shoesdata.json)
 
 Going to use
-- Coroutines 
+- Coroutines
 - HttpsURLConnection
 - Kotlinx.seralization
 - LazyVerticalGrid
@@ -646,11 +606,11 @@ Going to use
      - `NetworkCheck.kt`
        - Contains a helper function `isInternetAvailable()` for network capability checks- a valid utility for data/network access layer.
 2. View Layer
-   - This is the **Jetpack compose UI** - responsible only for rendering the UI based on data provided by the ViewModel. 
+   - This is the **Jetpack Compose UI** - responsible only for rendering the UI based on data provided by the ViewModel.
      - `MainActivity.kt`
        - Initializes the `ShoeViewModel` and passes it down.
        - Checks for Internet and shows a dialog.
-       - Launches `ShoeApp` which is a composable based on the network availability. 
+       - Launches `ShoeApp` which is a composable based on the network availability.
      - `ShoeApp.kt`
        - uses `NavController` for screen Navigation.
        - Displays loading state or routes to `ShoeGrid` and `ShoeDetailsScreen`.
@@ -673,7 +633,7 @@ Going to use
 
 [Click Here](https://sqliteonline.com/) to practice the commands below.
 
-###### Table Sample used 
+###### Table Sample used
 ***Table name: students_data***
 student_id|student_name|student_age
 ----------|-----------|-----------
@@ -681,11 +641,11 @@ student_id|student_name|student_age
 2|Md Naveed|22
 3|Chester|21
 4|Darshana|20
-  
+
 SQLite - Is a Database which is light weight database
 - It is embedded in Android by default.
 
-###### Main Classes that we have on android to make use of SLQLite are
+###### Main Classes that we have on Android to make use of SLQLite are
 - SQLiteDatabase
     - It is used to perform all SQLite operations (database Operations)
 - SQLiteOpenHelper
@@ -737,29 +697,28 @@ The Room persistence library provides an abstraction layer over SQLite to allow 
 - Convenience annotations that minimize repetitive and error-prone boilerplate code.
 - Streamlined database migration paths.
 
-We have built a `Note Taking App`, refer the entire notes [here](/Note%20Taking%20App.md) 
+We have built a `Note Taking App`, refer the entire notes [here](/Note%20Taking%20App.md)
 
 ### When we can use ViewModel without needing additional dependencies, why did we add the dependency to our project ?
 
-You can use ViewModel without additional dependencies in "Non-Compose" apps because it is part of Android's Jetpack "androidx.lifecycle" library. 
+You can use ViewModel without additional dependencies in "Non-Compose" apps because it is part of Android's Jetpack "Androidx.lifecycle" library.
 
-But When you use jetpack compose, you need `lifecycle-viewmodel-compose` to bridge the gap between ViewModel and Compose. 
+But When you use Jetpack Compose, you need `lifecycle-ViewModel-Compose` to bridge the gap between ViewModel and Compose.
 
 **Why do you need this dependency?**
 
 - Compose has no built in knowledge of ViewModel
-  - Jetpack compose is UI-First and Declarative, while viewmodel is part of the architecture componenents. To Make them work together - like using viewModel() inside a @composable - You need
+  - Jetpack Compose is UI-First and Declarative, while ViewModel is part of the architecture componenents. To Make them work together - like using viewModel() inside a @composable - You need
 ```kotlin
-implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.0")
+implementation("Androidx.lifecycle:lifecycle-ViewModel-Compose:2.9.0")
 ```
 
 This dependency gives you
 - viewModel() function for Composables.
 - Seamless lifecycle-aware integration
-- Ability to scope viewModel to Naviagtion graphs or composable interactions. 
+- Ability to scope viewModel to Navigation graphs or composable interactions.
 
-### Assignment
-Add an Icon (Heat icon - That initially displays an outlined heart icon - When clicked has to turn a filled heart icon) up on tapping it, we should add all the shoe details to Room Database. Later on, when the same shoe is opened, the screen should show a filled heart icon as it is present in the room Database. On top of this, use a button to navigate the user to wishlisted items screen where you display All the items that are added to the database.
+***Please complete Assignment 4***
 
 ---
 
@@ -833,7 +792,7 @@ Starting from **Android 8.0 (API 26)**, you must **register a Notification Chann
 
 ```xml
 <!-- AndroidManifest.xml -->
-<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+<uses-permission Android:name="Android.permission.POST_NOTIFICATIONS"/>
 ```
 
 ### Step 2: Request Permission (Runtime - API 33+)
@@ -876,10 +835,10 @@ fun createNotificationChannel(context: Context) {
 ```kotlin
 fun showSimpleNotification(context: Context) {
     val builder = NotificationCompat.Builder(context, "channel_id")
-        .setSmallIcon(R.drawable.ic_notification)
-        .setContentTitle("Welcome Student!")
-        .setContentText("Your first Jetpack Compose notification is here.")
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+       .setSmallIcon(R.drawable.ic_notification)
+       .setContentTitle("Welcome Student!")
+       .setContentText("Your first Jetpack Compose notification is here.")
+       .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
     with(NotificationManagerCompat.from(context)) {
         notify(1001, builder.build())
@@ -915,11 +874,11 @@ fun showNotificationWithAction(context: Context) {
     )
 
     val builder = NotificationCompat.Builder(context, "channel_id")
-        .setSmallIcon(R.drawable.ic_notification)
-        .setContentTitle("Tap to Open")
-        .setContentText("This notification has an action.")
-        .setContentIntent(pendingIntent)
-        .setAutoCancel(true)
+       .setSmallIcon(R.drawable.ic_notification)
+       .setContentTitle("Tap to Open")
+       .setContentText("This notification has an action.")
+       .setContentIntent(pendingIntent)
+       .setAutoCancel(true)
 
     NotificationManagerCompat.from(context).notify(1002, builder.build())
 }
@@ -934,11 +893,11 @@ fun showBigTextNotification(context: Context) {
     val bigText = "This is a very long message that will be shown when the notification is expanded. You can use it to show more information to the user."
 
     val builder = NotificationCompat.Builder(context, "channel_id")
-        .setSmallIcon(R.drawable.ic_notification)
-        .setContentTitle("BigTextStyle Example")
-        .setContentText("This is a short preview.")
-        .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
-        .setPriority(NotificationCompat.PRIORITY_HIGH)
+       .setSmallIcon(R.drawable.ic_notification)
+       .setContentTitle("BigTextStyle Example")
+       .setContentText("This is a short preview.")
+       .setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
+       .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     NotificationManagerCompat.from(context).notify(1003, builder.build())
 }
@@ -960,8 +919,8 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
+                       .fillMaxSize()
+                       .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     NotificationButton()
@@ -1012,15 +971,15 @@ fun createChannel(context: Context, id: String, name: String) {
 ---
 
 ### Pending Intent
-A Pending intent is a token that you give to another applicaiton (like system, AlarmManager, NotificationManager , etc.,) which allows the application to execute **your App's Code** at a later time, on **Your app's behalf**, even if your app is not running. 
+A Pending intent is a token that you give to another applicaiton (like system, AlarmManager, NotificationManager, etc.,) which allows the application to execute **your App's Code** at a later time, on **Your app's behalf**, even if your app is not running.
 
 **Why is it needed?**
-Android apps run in a sandbox. so, one app cannot directly execute code from another app. Pending intent acts as a permission wrapper, allowing system services or other apps to perform operations using your app's identity and permissions. 
+Android apps run in a sandbox. so, one app cannot directly execute code from another app. Pending intent acts as a permission wrapper, allowing system services or other apps to perform operations using your app's identity and permissions.
 
 **For Example**
 - Sending a notification that opens your app when clicked.
 - Scheduling an alarm using AlarmManager
-- Creating home screen widget that interacts with your app. 
+- Creating home screen widget that interacts with your app.
 
 **How does Pending Intent Works ?**
 
@@ -1029,7 +988,7 @@ It wraps an Intent, and you specify the operation
 - Start Service
 - Start Broadcast
 
-Instead of executing the code now, It gives the system a handle to defer the execution. 
+Instead of executing the code now, It gives the system a handle to defer the execution.
 
 **Types**
 - getActivity() - launches an Activity
@@ -1039,17 +998,17 @@ Instead of executing the code now, It gives the system a handle to defer the exe
 
 **Important Flags**
 - `FLAG_UPDATE_CURRENT` : Updates the existing pending intent with new extras
-- `FLAG_CANCEL_CURRENT`: Cancels the existing pending intent and creates a new one. 
-- `FLAG_NO_CREATE`: It returns null if no matching pending intent exists. 
+- `FLAG_CANCEL_CURRENT`: Cancels the existing pending intent and creates a new one.
+- `FLAG_NO_CREATE`: It returns null if no matching pending intent exists.
 - `FLAG_ONE_SHOT`: can be used only once
 - `FLAG_IMMUTABLE` It prevents the intent from the existing pending intent from being modified.
-- `FLAG_MUTABLE`: allows the intent to be modified. 
+- `FLAG_MUTABLE`: allows the intent to be modified.
 
 
 ### Broadcast Receiver
 [slides](https://docs.google.com/presentation/d/1qF9Yeau7uHIP7_aOHWgPU_RnfxACZzGyAZIzcJWz0R0/edit?slide=id.g3cba478010_0_13#slide=id.g3cba478010_0_13)
 
-[Link to Official Documentation](https://developer.android.com/develop/background-work/background-tasks/broadcasts)
+[Link to Official Documentation](https://developer.Android.com/develop/background-work/background-tasks/broadcasts)
 
 
 ### Firebase
@@ -1060,7 +1019,7 @@ It is a Backend-as-a-service (BaaS) platform developed by Google that provides d
 **Firebase Core Features**
 1. [Firebase Authentication](https://firebase.google.com/docs/auth)
    -   Helps you sign in users securely
-   -   Supports: Email/Password, [Google](https://firebase.google.com/docs/auth/android/google-signin), Facebook, Phone, etc.,
+   -   Supports: Email/Password, [Google](https://firebase.google.com/docs/auth/Android/google-signin), Facebook, Phone, etc.,
 2. Cloud Firestore
    - A NoSQL cloud database to store and sync data in real time.
    - Supports Offline access
@@ -1084,11 +1043,11 @@ It is a Backend-as-a-service (BaaS) platform developed by Google that provides d
 7. Firebase Cloud Messaging (FCM)
    - Used to send push notifications to Android, Ios, and web users.
    - Free and Scalable
-   - can target topics, specific devices or user groups. 
+   - can target topics, specific devices or user groups.
 8. Firebase Analytics
    -   Tracks user behavior and app usage
    -   Integrated with Google Analytics.
-   -   Helps improve user engagement and retention. 
+   -   Helps improve user engagement and retention.
 
 [Read about all firebase features](https://firebase.google.com/docs)
 
@@ -1105,7 +1064,7 @@ feature|Firestore|realtime databases
 ---|---|---
 data model|document-collection|JSON Tree
 Queries|Indexed, complex queires supported|Shallow Queries Only
-Offline Support|Yes (android, web and ios)|yes
+Offline Support|Yes (Android, web and ios)|yes
 Real-time updates|yes|yes
 Scalability|more scalable|less scalable
 Multi-region support|yes|No
@@ -1180,45 +1139,45 @@ Retrofit turns your HTTP API into a Java (or Kotlin) interface
 
 Retrofit is the class through which your API interfaces are turned into callable objects. By default, Retrofit will give you sane defaults for your platform, but it allows for customization.
 
-**Converters**  
+**Converters**
 By default, Retrofit can only deserialize HTTP bodies into OkHttp’s ResponseBody type, and it can only accept its RequestBody type for @Body.
 
 Converters can be added to support other types. Sibling modules adapt popular serialization libraries for your convenience.
 
 **Built-in converters**
 
-**Gson:** com.squareup.retrofit2:converter-gson  
+**Gson:** com.squareup.retrofit2:converter-gson
 **Jackson:** com.squareup.retrofit2:converter-jackson
-**Moshi:** com.squareup.retrofit2:converter-moshi  
-**Protobuf:** com.squareup.retrofit2:converter-protobuf  
-**Wire:** com.squareup.retrofit2:converter-wire  
-**Simple XML:** com.squareup.retrofit2:converter-simplexml  
-**JAXB:** com.squareup.retrofit2:converter-jaxb  
-**Kotlin serialization:** com.squareup.retrofit2:converter-kotlinx-serialization  
-**Scalars (primitives, boxed, and String):** com.squareup.retrofit2:converter-scalars   
+**Moshi:** com.squareup.retrofit2:converter-moshi
+**Protobuf:** com.squareup.retrofit2:converter-protobuf
+**Wire:** com.squareup.retrofit2:converter-wire
+**Simple XML:** com.squareup.retrofit2:converter-simplexml
+**JAXB:** com.squareup.retrofit2:converter-jaxb
+**Kotlin serialization:** com.squareup.retrofit2:converter-kotlinx-serialization
+**Scalars (primitives, boxed, and String):** com.squareup.retrofit2:converter-scalars
 
 **Dependencies**
-```kotlin 
+```kotlin
 implementation("com.squareup.retrofit2:retrofit:3.0.0")
 implementation("com.squareup.retrofit2:converter-gson:3.0.0")
 
 ```
 
-**JSONPlaceHolder**  
-This is a fake RestFul Webservice that you can use to test if you are able to make netwrok requests.  
+**JSONPlaceHolder**
+This is a fake RestFul Webservice that you can use to test if you are able to make netwrok requests.
 [Link](https://jsonplaceholder.typicode.com/)
 
-**Postman**   
-Postman is a tool that you can use online or install it on the device to check if the REST APIs are working as per the requirement  
+**Postman**
+Postman is a tool that you can use online or install it on the device to check if the REST APIs are working as per the requirement
 [link](https://www.postman.com/)
 
-**What are POST & GET ?**   
-These are fundamental HTTP (Hypertext Transfer Protocol) methods used to communicate with web servers. They are essential for any app that needs to fetch data from an API or send data to server. 
+**What are POST & GET ?**
+These are fundamental HTTP (Hypertext Transfer Protocol) methods used to communicate with web servers. They are essential for any app that needs to fetch data from an API or send data to server.
 
 ***GET Request***
-- Purpose: Primarily used to retrieve data from server. It's like asking a server for information without charging anything on the server. 
+- Purpose: Primarily used to retrieve data from server. It's like asking a server for information without charging anything on the server.
 - Data Transmission: Data is sent as URL Parameters (Query Strings)
-- Visibility : The data is visible in the URL, browser history, server logs and can be bookmarked or cached. 
+- Visibility : The data is visible in the URL, browser history, server logs and can be bookmarked or cached.
 - Security: Less secure for sensitive data because the data is exposed in the URL. While Https encrypts the entire connection, the data itself is still part of the publicly visible URL.
 
 ***When to use GET in Android ?***
@@ -1228,44 +1187,44 @@ These are fundamental HTTP (Hypertext Transfer Protocol) methods used to communi
 - Loading a webpage
 
 ***POST Request***
-- Purpose: Primarily used to send data to the server to create or update a resource. It's like submitting information to the server that will likely cause a change. 
-- Data Transmission: Data is sent in the request body, which is seperate from the URL. 
-- Visibility: The data is not visible in the URL, providing a higher level of privacy and security compared to GET. 
+- Purpose: Primarily used to send data to the server to create or update a resource. It's like submitting information to the server that will likely cause a change.
+- Data Transmission: Data is sent in the request body, which is seperate from the URL.
+- Visibility: The data is not visible in the URL, providing a higher level of privacy and security compared to GET.
 
 ***When do we use POST***
 - submitting a form (e.g., user registration, login)
 - Uploading of files (images, documents)
 - Creating a new resource on the server
-- Sending sensitive information. 
+- Sending sensitive information.
 
 #### What is lazy{...} and lateinit ?
 
-`lazy` & `lateinit` are both kotlin features designed to defer the initialization of properties, but they cater to different scenarios and have distinct characteristics. Choosing between them depends on how and when you expect the property to be initialized. 
+`lazy` & `lateinit` are both kotlin features designed to defer the initialization of properties, but they cater to different scenarios and have distinct characteristics. Choosing between them depends on how and when you expect the property to be initialized.
 
 
 `lateinit`
 - Means Late initialization. You are promising the kotlin compiler that you will initialize the property before you use it.
-- **Applicability** 
+- **Applicability**
   - Can only be used with `mutable` properties (`var`)
   - can only be used with non-nullable types
   - can only be used with non-primitive types (e.g, `String`,`MyClass`, `Context`, `Retrofit`) you cannot use it for `Int`, `Boolean`, `Double`, etc.,
 - **Initialization**
   - must happen externally, usually in lifecycle method like `onCreate` or on a constructor, or a dependency injection framework.
-  - It is not `Thread-safe` by default. if multiple threads try to initalize it simultaneously, you will run into issues. 
+  - It is not `Thread-safe` by default. if multiple threads try to initalize it simultaneously, you will run into issues.
 
 `lazy`
-- Means "lazy initialization". The property will be initialized only on it's first access. 
-- **Applicability** 
+- Means "lazy initialization". The property will be initialized only on it's first access.
+- **Applicability**
   - can only be used with immutable properties (`val`)
   - can only be used with non-nullable types
   - can be used with `Any type`, including the primitives.
 - **Initialization**
-  - The initialization logic is defined with in the `lazy{...}` lambda block. 
+  - The initialization logic is defined with in the `lazy{...}` lambda block.
   - The initialization only happens `ONCE`(on the first access), and the computed value is then stored (memorized) for all subsequent accesses.
   - It is `Thread safe` by default.
 
 In Essence:
-- use `lateinit` when you know the property will be initalized externally at some point before use, and it needs to be mutable. 
+- use `lateinit` when you know the property will be initalized externally at some point before use, and it needs to be mutable.
 - use `lazy` when the initialization logic can be defined right at the declaration, and you want to defer its creation until it's actually needed for a read-only property.
 
 ***For JsonTypicode - Retrofit App***
@@ -1277,36 +1236,36 @@ In Essence:
   - model: Domain - specific data classes (if different from data layer)
   - repository - abstract interface for data operations
   - use case - Business logic for specific operations
-- presentation: Contains UI related code (Compose Composables, viewmodels)
+- presentation: Contains UI related code (Compose Composables, ViewModels)
   - UI: Composable Functions
   - ViewModel
 - Util
 
 
 ## Alarm Manager in Android
-Alarm manager is a system service in android that allows you to schedule operations to be executed at a specific time, even if the app is not running. It is commonly used for setting alarms, reminders, or background tasks that must occur at precise time intervals. 
+Alarm manager is a system service in Android that allows you to schedule operations to be executed at a specific time, even if the app is not running. It is commonly used for setting alarms, reminders, or background tasks that must occur at precise time intervals.
 
 ### 1. What is Alarm Manager?
 Alarm Manager lets you schedule tasks to run at a specific time or after a delay. It works even when your app is not in the foreground or when the device is idle, depending on the type of alarm used
 
 ***Key Features***
 - Schedule operations to run at a precise time
-- Works in the background, even when the app is killed. 
+- Works in the background, even when the app is killed.
 - supports both exact and inexact timings.
 
 ### 2. Types of Alarms
-- RTC (Real time Clock) : Triggered based on the current system time. 
-  - RTC_WAKEUP:Wakes the device to trigger the alarm. 
-  - RTC: Triggers the alarm only if the device is already awake. 
-- ELAPSED_REALTIME : Triggered after a specified time relative to the device boot time. 
+- RTC (Real time Clock) : Triggered based on the current system time.
+  - RTC_WAKEUP:Wakes the device to trigger the alarm.
+  - RTC: Triggers the alarm only if the device is already awake.
+- ELAPSED_REALTIME : Triggered after a specified time relative to the device boot time.
   - ELAPSED_REALTIME_WAKEUP: Wakes the device to trigger the alarm
-  - ELAPSED_REALTIME: Triggers the alarm only if the device is already awake. 
+  - ELAPSED_REALTIME: Triggers the alarm only if the device is already awake.
 
 ### 3. **Setup and Configuration**
 
 ### Add Permissions in `AndroidManifest.xml`:
 ```xml
-<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission Android:name="Android.permission.WAKE_LOCK" />
 ```
 
 ---
@@ -1318,10 +1277,10 @@ Alarm Manager lets you schedule tasks to run at a specific time or after a delay
 This will define what happens when the alarm goes off:
 
 ```kotlin
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.widget.Toast
+import Android.content.BroadcastReceiver
+import Android.content.Context
+import Android.content.Intent
+import Android.widget.Toast
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -1334,10 +1293,10 @@ class AlarmReceiver : BroadcastReceiver() {
 Use `AlarmManager` to schedule the alarm:
 
 ```kotlin
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
+import Android.app.AlarmManager
+import Android.app.PendingIntent
+import Android.content.Context
+import Android.content.Intent
 import java.util.Calendar
 
 fun scheduleAlarm(context: Context) {
@@ -1402,10 +1361,10 @@ fun scheduleRepeatingAlarm(context: Context) {
 - **Handle device restarts:** Use `BOOT_COMPLETED` broadcast to reschedule alarms after a device reboot.
 
 ```xml
-<receiver android:name=".AlarmReceiver" />
-<receiver android:name=".BootReceiver">
+<receiver Android:name=".AlarmReceiver" />
+<receiver Android:name=".BootReceiver">
     <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action Android:name="Android.intent.action.BOOT_COMPLETED" />
     </intent-filter>
 </receiver>
 ```
@@ -1424,9 +1383,9 @@ fun scheduleRepeatingAlarm(context: Context) {
 ---
 
 ## 8. **Useful Resources**
-- [AlarmManager Documentation](https://developer.android.com/reference/android/app/AlarmManager)
-- [PendingIntent Documentation](https://developer.android.com/reference/android/app/PendingIntent)
-- [Doze Mode and App Standby](https://developer.android.com/training/monitoring-device-state/doze-standby)
+- [AlarmManager Documentation](https://developer.Android.com/reference/Android/app/AlarmManager)
+- [PendingIntent Documentation](https://developer.Android.com/reference/Android/app/PendingIntent)
+- [Doze Mode and App Standby](https://developer.Android.com/training/monitoring-device-state/doze-standby)
 
 
 ### Job Scheduler
@@ -1439,25 +1398,17 @@ fun scheduleRepeatingAlarm(context: Context) {
     - This is where we define the task and also cancel a task (Job).
       - onStartJob():Boolean
         - True - When the job is offloaded to a worker thread (When the job runs in the background) - when the job is finished on the worker thread, you are supposed to explicitly call `jobFinished()`.
-        - False - When the task is completed. 
-        - By Deafult, this method runs on Main Thread. 
+        - False - When the task is completed.
+        - By Default, this method runs on Main Thread.
       - onStopJob():Boolean
   - JobInfo
-    - This is where the conditions / Constraints get set. 
+    - This is where the conditions / Constraints get set.
   - JobScheduler
-    - Will schedule or cancel jobs.    
+    - Will schedule or cancel jobs. 
 
-**Note**: All JobSchedulers must be registered as a servie in the manifest file 
+**Note**: All JobSchedulers must be registered as a service in the manifest file
 
-
-### Assignment
-- Create an Android app that uses `JobScheduler` to Sync data from a fake server (You can just log a statement or fetch dummy json from a url) every 15 minutes, but only when the device is charging and it is connected to unmetered network (Like Wifi).
-  - A Button to schedule a JOb
-  - JobInfo.Builder to configure job conditions/constraints
-  - JobService to handle the background task
-    - You have to offload the work to a worker thread. 
-  - Test it
-- Additionally, you can also show a notification to the users when the job is in running state, eventually, cancel this notification when the job is finished or stopped in between. 
+***Please complete Assignment 5***
 
 ### Work Manager
 Work Manager is a more modern and flexible API for background Tasks introduced in Jetpack. It supports constraints and is compatible with all API levels >14.
@@ -1471,7 +1422,7 @@ Work Manager is a more modern and flexible API for background Tasks introduced i
 1. Add Dependencies
 
 ```kotlin
-implementation("androidx.work:work-runtime-ktx:2.10.1")
+implementation("Androidx.work:work-runtime-ktx:2.10.1")
 ```
 2. Define a Worker
 ```kotlin
@@ -1489,17 +1440,17 @@ class MyWorker(context: Context, workerParameters: WorkerParameters) : Worker(co
 3.  Schedule a work request
 ```kotlin
  val constraints = Constraints.Builder()
-            .setRequiresCharging(true)
-            .build()
+           .setRequiresCharging(true)
+           .build()
 
         // TODO 3: Create a work request
         val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
-            .setConstraints(constraints)
-            .build()
+           .setConstraints(constraints)
+           .build()
 
         val periodicWorkRequest = PeriodicWorkRequestBuilder<MyWorker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .build()
+           .setConstraints(constraints)
+           .build()
 
 WorkManager.getInstance(applicationContext).enqueue(workRequest)
 
@@ -1509,7 +1460,7 @@ WorkManager.getInstance(applicationContext).enqueue(periodicWorkRequest)
 
 
 4.  Key Differences between WorkManager & JobScheduler
-   
+
 Feature|JobScheduler|WorkManager
 ---|---|---
 API level Support | 21+ | 14+
@@ -1517,19 +1468,19 @@ Task Execution | Not guaranteed after app is killed | Guaranteed
 Chaining tasks | Not Supported | Supported
 Library Dependency | No | Requires Jetpack WorkManager
 
-[Official Doc](https://developer.android.com/reference/androidx/work/WorkManager)
+[Official Doc](https://developer.Android.com/reference/Androidx/work/WorkManager)
 
 ### Shared Preferences
-Shared preferences is a light weight storage mechanism in android that allows storing small key-value pairs persistently. It is mainly used for storing simple data like user preferences, settings, or session data. 
+Shared preferences is a light weight storage mechanism in Android that allows storing small key-value pairs persistently. It is mainly used for storing simple data like user preferences, settings, or session data.
 
 **Key Features**
 - Stores data in XML format
-- Data persists even after the app is closed or restarted. 
+- Data persists even after the app is closed or restarted.
 - Best suited for small amounts of primitive data (eg., Strings, Integers, Boolean)
-- Not Suitable for large or complex data structures like lists or images. 
+- Not Suitable for large or complex data structures like lists or images.
 
 ### Jetpack Data Store in Android
-Jetpack data store is Google's recommended replacement for Shared Preferences. It provides a more efficient, safer and asynchronous way to store key-value data using kotlin coroutines and flow. 
+Jetpack data store is Google's recommended replacement for Shared Preferences. It provides a more efficient, safer and asynchronous way to store key-value data using kotlin coroutines and flow.
 
 **Why use Data store instead of shared preferences ?**
 - Asynchronous : Use coroutines and Flow, avoiding UI Thread blocking
@@ -1540,19 +1491,19 @@ Jetpack data store is Google's recommended replacement for Shared Preferences. I
 - Preference DataStore: Key-value storages (very similar to shared preferences)
 - Proto Datastore: Stores structured objects with type safety using [protocol buffers](https://protobuf.dev/) (ProtoBuf)
 
-[Datastore](https://developer.android.com/topic/libraries/architecture/datastore)
+[Datastore](https://developer.Android.com/topic/libraries/architecture/datastore)
 
 ### Content Provider
-A Contnet Provider is one of the four fundamental Android Application Components (the others being Activities, Services, Broadcast Receivers), whose primary purpose is to Manage access to a structured set of data. It acts as a standarad interface for applications to interact with data, wheather the data is stored in a database (room), files, over the network, or any other storage mechanisms. 
+A Content Provider is one of the four fundamental Android Application Components (the others being Activities, Services, Broadcast Receivers), whose primary purpose is to Manage access to a structured set of data. It acts as a standarad interface for applications to interact with data, wheather the data is stored in a database (room), files, over the network, or any other storage mechanisms.
 
 **Core Components**
 - ContentProvider class
   - This is the abstract class you will extend to
   - You must implement the following methods
-    - onCreate() - Called when the provider is first created. Intilize your data source here (e.g., Get a reference to your room database DAO)
+    - onCreate() - Called when the provider is first created. Initialize your data source here (e.g., Get a reference to your room database DAO)
     - query(uri, projection, selection, selectionArgs, sortOrder): Retrieves data. Returns the data in a `Cursor` (Which is like a pointer to a set of rows)
-    - insert(uri, values): Insert new rows. returns a URI of the new Row. 
-    - update(uri, values, selection, selectionArgs): Updates the existing rows. Returns the number of rows affected. 
+    - insert(uri, values): Insert new rows. returns a URI of the new Row.
+    - update(uri, values, selection, selectionArgs): Updates the existing rows. Returns the number of rows affected.
     - delete(uri, selection, selectionArgs): Deletes rows. Returns the number of rows affected.
     - getType(uri): Returns the MIME type for the given URI. Useful for client apps to understand the data type
 - ContentResolver class
@@ -1560,31 +1511,26 @@ A Contnet Provider is one of the four fundamental Android Application Components
   - You can access it via context.getContentResolver()
 - Uri (uniform resource Identifier)
   - The most crucial part for identifying data
-  - Its String representing the data you want to access. 
+  - Its String representing the data you want to access.
   - format: content://authority/path/id
-    - "content://": scheme, always for content providers
-    - authority: Uniquely identifies the content provider . This must be defined in the manifest file. 
+    - "content://": scheme, always for Content Providers
+    - authority: Uniquely identifies the Content Provider. This must be defined in the manifest file.
     - path : Specific type of data
-  - UriMatcher: This is a helper class used with your contnet provider to parse the incoming URIs and determine which data they refer to. Makes `switch` statements more manageable. 
+  - UriMatcher: This is a helper class used with your content provider to parse the incoming URIs and determine which data they refer to. Makes `switch` statements more manageable.
 
-
-### Assignments
-1. Create a simple content provider that exposes data from a room database
-2. Perform CRUD operations on the same `Content Resolver` app that we built.
-3. Try to access the contacts provider and list out all the contacts.
-
+***Please complete Assignment 6***
 
 ### Android Services
 
 **What is a service ?**
-- A Service is an application component that runs in the background to perform long running tasks. 
+- A Service is an application component that runs in the background to perform long running tasks.
   - It has no user interface
   - It can continue running even when the user switches to another app
-  - Other components (like activities) can bind to a service to interact with it. 
+  - Other components (like activities) can bind to a service to interact with it.
 
-[Official Documentation](https://developer.android.com/develop/background-work/services)
+[Official Documentation](https://developer.Android.com/develop/background-work/services)
 
-**Why use Service?**  
+**Why use Service?**
 Services are perfect for tasks that
 - Should not be interrupted by user interactions
 - Need to run in the background (like playing music, downloading a file, or checking the updates)
@@ -1595,8 +1541,8 @@ Services are perfect for tasks that
 Type|Description
 ---|---
 Foreground| Runs in the foreground and shows a notification (e.g., music playback, fitness tracking)
-Background| Runs in the background without user interaction (more restricted in newer android versions)
-Bound| Clients (Activities/Fragments) bind to the service to interact with it and exchange data. 
+Background| Runs in the background without user interaction (more restricted in newer Android versions)
+Bound| Clients (Activities/Fragments) bind to the service to interact with it and exchange data.
 
 **Service Lifecycle**
 ![life-cycle-image](/service_lifecycle.png)
@@ -1604,12 +1550,12 @@ Bound| Clients (Activities/Fragments) bind to the service to interact with it an
 
 Method | When it's called & What it does
 ---|---
-onCreate()| Called once when the service is first created. Intialize resources here. 
-onStartCommand()|Called each time the service is started with `startService(...)` 
-onBind(intent)| called when another component binds to the service. Returns an IBinder for communication. 
+onCreate()| Called once when the service is first created. Intialize resources here.
+onStartCommand()|Called each time the service is started with `startService(...)`
+onBind(intent)| called when another component binds to the service. Returns an IBinder for communication.
 onDestroy()|called when the service is no longer used and is being destroyed. Cleaning up of resources happens here.
 
-**Key Notes on onStartCommand()**  
+**Key Notes on onStartCommand()**
 - Return values of this method tell Android what to do if the service is killed
   - `START_STICKY` - restart the service after it is killed (no intent data)
   - `START_NOT_STICKY` - Don't restart if the service is killed.
@@ -1617,20 +1563,17 @@ onDestroy()|called when the service is no longer used and is being destroyed. Cl
 - If you are using binding (bound services), you do not need to implement `onStartCommand(...)`
 
 **Important Note**
-- By default, a service runs on the main thread. 
-- move long tasks to a seperate thread (like HandlerThread or Coroutines or an ExecutorService) to avoid ANR (Application Not Responding) errors. 
+- By default, a service runs on the main thread.
+- move long tasks to a seperate thread (like HandlerThread or Coroutines or an ExecutorService) to avoid ANR (Application Not Responding) errors.
 
 **Example Use cases**
 - Foreground Service - Music app playing songs with a visible notifications.
 - Background Service - Periodically uploading logs or files.
-- Bound Service - Weather app fetching current temperature on Demand. 
+- Bound Service - Weather app fetching current temperature on Demand.
 
-### Assignment
-- Create an app that streams music from internet (just one working link is sufficient) using Foreground Services.
-- Try out the following code for bound services
+***Please complete Assignment 7***
 
-
-Define a **bound service** that returns the **current time**  
+Define a **bound service** that returns the **current time**
 Create a **Compose UI** that binds to the service and fetches data
 
 ---
@@ -1768,11 +1711,11 @@ class MainActivity : ComponentActivity() {
 
 ### Dependency Injection (DI)
 
-**What is Dependency Injection ?**  
+**What is Dependency Injection ?**
 
 Dependency Injection is a design pattern in which **an object receives the other objects it depends on from an external source**, rather than creating them itself.
 
-**Dependency** -> The object a class needs to function.  
+**Dependency** -> The object a class needs to function.
 **Injection** -> Providing the dependency to the class, instead of letting it create it.
 
 **Why use Dependency Injection ?**
@@ -1805,8 +1748,8 @@ class Computer{
 }
 ```
 
-**Issue**  
-The computer class creates its dependencies itself. If you want to change, upgrade, or test these depenedencies, you have to modify the computer class which is not flexible. 
+**Issue**
+The computer class creates its dependencies itself. If you want to change, upgrade, or test these depenedencies, you have to modify the computer class which is not flexible.
 
 ***With Dependency Injection***
 
@@ -1825,7 +1768,7 @@ class HDD {
     // Implementation
 }
 
-class Computer(private val ram:RAM, 
+class Computer(private val ram:RAM,
 private val processor: PROCESSOR,
 private val hdd: HDD)
 {
@@ -1836,14 +1779,14 @@ private val hdd: HDD)
 **What have we changed ?**
 
 - The computer class no longer creates its dependencies
-- It receives them from the outside -> Easier to manage and test. 
+- It receives them from the outside -> Easier to manage and test.
 
 
 ### Types of DI
 1. Constructor Injection
    - Dependencies are provided through the constructor
 ```kotlin
-class Computer(private val ram:RAM, 
+class Computer(private val ram:RAM,
 private val processor: PROCESSOR,
 private val hdd: HDD)
 {
@@ -1851,7 +1794,7 @@ private val hdd: HDD)
 }
 ```
 1. Setter (Property) Injection
-   - Dependencies are provided through setters or public properties. 
+   - Dependencies are provided through setters or public properties.
 ```kotlin
 class Computer{
     lateinit var ram:RAM
@@ -1865,23 +1808,23 @@ class Computer{
     // other public methods as such
 }
 ```
-3. Interface Injection 
+3. Interface Injection
    - Less commonly used.
 
 
 ### DI in Android
-In real android apps, managing dependencies manually can get complicated. That's why we use DI frameworks like
+In real Android apps, managing dependencies manually can get complicated. That's why we use DI frameworks like
 - Dagger (Powerful but more boilerplate)
 - Hilt (built on Dagger, easier to use in Android)
 - Koin (Kotlin-specific, simpler for smaller projects)
 
-[**Hilt Documentation**](https://developer.android.com/training/dependency-injection/hilt-android)
+[**Hilt Documentation**](https://developer.Android.com/training/dependency-injection/hilt-Android)
 
 ***Set up Hilt with KSP***
 - In your Project level build.gradle, under the plugins
 ```kotlin
 id("com.google.devtools.ksp") version "1.9.0-1.0.11" apply false
-    id("com.google.dagger.hilt.android") version "2.56.2" apply fals
+    id("com.google.dagger.hilt.Android") version "2.56.2" apply fals
 ```
 - Sync the project
 - In your app level build.gradle file, enable  the plugins
@@ -1889,14 +1832,14 @@ id("com.google.devtools.ksp") version "1.9.0-1.0.11" apply false
 plugins {
     //...
     id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.Android")
 }
 ```
 - In your app level build.gradle file, under the dependencies
 ```kotlin
 dependencies {
 
-    implementation("com.google.dagger:hilt-android:2.56.2")
+    implementation("com.google.dagger:hilt-Android:2.56.2")
     ksp("com.google.dagger:hilt-compiler:2.56.2")
 
     //...
@@ -1909,7 +1852,7 @@ make sure to use proper ksp version based on your kotlin version
 
 
 ### Testing in Android
-When you implement your first feature in android app, you ran your application on a physical device and also sometimes on emulator to verify if the code works as expected. This means you already tested an application, albeit a manual test. 
+When you implement your first feature in Android app, you ran your application on a physical device and also sometimes on emulator to verify if the code works as expected. This means you already tested an application, albeit a manual test.
 
 **Types of Tests**
 - Functional Tests : Does my app do what it's supposed to do ?
@@ -1918,19 +1861,19 @@ When you implement your first feature in android app, you ran your application o
 
 **Scope**
 - Tests vary depending on the size, or degree of isolation.
-  - Unit Testinig: These are called small tests. These tests will only verify a small portion of your application such as method or class. 
-  - End to End Testing: We may test the entire screen or userflow. 
-  - Integration Testing: If you have more modules and doing integration, these tests are really helpful. These are also called as `Medium` tests. 
+  - Unit Testinig: These are called small tests. These tests will only verify a small portion of your application such as method or class.
+  - End to End Testing: We may test the entire screen or userflow.
+  - Integration Testing: If you have more modules and doing integration, these tests are really helpful. These are also called as `Medium` tests.
 
 - [Mockito Framework](https://site.mockito.org/)
-- [Roboelectric by Google](https://developer.android.com/training/testing/local-tests/robolectric)
-- [Official Documentation](https://developer.android.com/training/testing/fundamentals)
+- [Roboelectric by Google](https://developer.Android.com/training/testing/local-tests/robolectric)
+- [Official Documentation](https://developer.Android.com/training/testing/fundamentals)
 
 
 ### UI Testing in Android
 
 ***What is UI Testing?***
-UI (User Interface) testing checks wheather the UI components of Android app function correctly and display the expected output. It Simulates user interactions like clicks, swipes and typing. 
+UI (User Interface) testing checks wheather the UI components of Android app function correctly and display the expected output. It Simulates user interactions like clicks, swipes and typing.
 
 ***Goals of UI Testing***
 - Ensure UI behaves as expected
@@ -1947,14 +1890,14 @@ Instrumentation| Full app with UI|Espresso, UI Automator
 ***Tools for UI Testing***
 1. Espresso (We cannot record UI tests for JEtpack Compose apps)
 2. UI Automator
-3. [Compose UI Testing](https://developer.android.com/develop/ui/compose/testing).
+3. [Compose UI Testing](https://developer.Android.com/develop/ui/Compose/testing).
 
 ### Build Flavors
 
 You can make the same app available in multiple flavors such as (Free & Paid). You do not need to create two different projects and everything can be done under one single project using build flavors
 
 Build flavors allows you to create different versions of your app (like free or paid) from a single codebase
-Each flavor can have  
+Each flavor can have
 - Different applicaiton IDs
 - Different Resources (icons, strings and layouts)
 - Different code or feature sets
@@ -1962,30 +1905,30 @@ Each flavor can have
 
 
 ### Types of Location Access in Android
-In Android, you can control location access in different ways, allowing users to choose how and when the app can access their location. 
+In Android, you can control location access in different ways, allowing users to choose how and when the app can access their location.
 
 1. Allow Only while using the app
    1. Also known as "While-in-use" or "Foreground-only" access
    2. Added in Android 10
-   3. Allows location access only when the app is actively used. 
+   3. Allows location access only when the app is actively used.
 2. Allow One-time
-   1. Grants location access for single session. when the user closed the app, access is revoked. 
+   1. Grants location access for single session. when the user closed the app, access is revoked.
 3. Allow All the time
    1. Provides the background access to the users location at any time.
-   2. Note: Your app must comply with the [Google Location Policies](https://support.google.com/googleplay/android-developer/answer/9799150?hl=en) for background location access.
+   2. Note: Your app must comply with the [Google Location Policies](https://support.google.com/googleplay/Android-developer/answer/9799150?hl=en) for background location access.
 4. Deny
-   1. The users can deny location access, preventing the app from accessing the location data. 
+   1. The users can deny location access, preventing the app from accessing the location data.
 
 ### Location Providers in Android
-Primarily android uses two location providers
+Primarily Android uses two location providers
 1. NETWORK_PROVIDER
-   1. Retrieves location based on cell-towers, Wi-Fi and other network signals. 
+   1. Retrieves location based on cell-towers, Wi-Fi and other network signals.
    2. Require `ACCESS_COARSE_LOCATION` permission
 2. GPS_PROVIDER
-   1. Provides the location data based on satellite signals for high accuracy. 
-   2. require `ACCESS_FINE_LOCATION` Permission. 
+   1. Provides the location data based on satellite signals for high accuracy.
+   2. require `ACCESS_FINE_LOCATION` Permission.
 
-Your application can access supported location services using classes in `com.google.android.gms.location` package. 
+Your application can access supported location services using classes in `com.google.Android.gms.location` package.
 
 
 ### Key classes for location in Android
@@ -1994,15 +1937,15 @@ Your application can access supported location services using classes in `com.go
    2. Use this class to request location update and retrieve last known location.
 2. LocationRequest
    1. A data object containing parameters like update intervals, priority and accuracy
-   2. Pass this object to `FusedLocationProviderClient` to specify the conditions for location updates. 
+   2. Pass this object to `FusedLocationProviderClient` to specify the conditions for location updates.
 3. LocationCallback
-   1. Used to retrieve notifications when the device's location changes or becomes unavailable. 
-   2. pass this as callback to `LocationResult` to capture and handle location data. 
+   1. Used to retrieve notifications when the device's location changes or becomes unavailable.
+   2. pass this as callback to `LocationResult` to capture and handle location data.
 
-### Assignment
-- Expolore Geo Fencing API and Google Places API on Google Cloud Console
-- Please refer my free ebook [here](https://android-app-development-documentation.readthedocs.io/en/latest/)
+***Please complete Assignment 8***
 
-
+---
+THE END
+---
 
 
